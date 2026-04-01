@@ -1,0 +1,3 @@
+(* externo (* interno *)
+class Main {
+};
