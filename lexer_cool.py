@@ -64,8 +64,8 @@ class Token:
     coluna: int
 
 
-class LexerCool:
-    PALAVRAS_CHAVE = {
+class Lexer:
+    PALAVRAS_RESERVADAS = {
         "class": TipoToken.CLASS,
         "else": TipoToken.ELSE,
         "fi": TipoToken.FI,
@@ -210,7 +210,7 @@ class LexerCool:
         if lexema.lower() == "false":
             return Token(TipoToken.FALSE, lexema, linha, coluna)
 
-        tipo = self.PALAVRAS_CHAVE.get(lexema.lower())
+        tipo = self.PALAVRAS_RESERVADAS.get(lexema.lower())
         if tipo:
             return Token(tipo, lexema, linha, coluna)
         return Token(
@@ -303,7 +303,7 @@ def main():
         sys.exit()
 
     caminho_codigo = sys.argv[1]
-    lexer = LexerCool(Path(caminho_codigo).read_text(encoding="utf-8"))
+    lexer = Lexer(Path(caminho_codigo).read_text(encoding="utf-8"))
     tokens = lexer.tokenizar()
     caminho_saida = salvar_saida(caminho_codigo, tokens)
 
