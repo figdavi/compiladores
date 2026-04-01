@@ -105,18 +105,18 @@ class LexerCool:
 
     BRANCOS = " \n\t\r\f\v"
 
-    def __init__(self, fonte: str):
-        self.fonte = fonte
+    def __init__(self, codigo: str):
+        self.codigo = codigo
         self.i = 0
         self.linha = 1
         self.coluna = 1
 
     def fim(self):  # Verifica se chegou ao fim do arquivo.
-        return self.i >= len(self.fonte)
+        return self.i >= len(self.codigo)
 
     def ver(self, k=0):  # Olha o caractere atual, ou alguns à frente, sem avançar.
         j = self.i + k
-        return self.fonte[j] if j < len(self.fonte) else "\0"
+        return self.codigo[j] if j < len(self.codigo) else "\0"
 
     def avancar(self):  # Esse método consome o caractere atual e move o cursor.
         c = self.ver()
@@ -238,7 +238,8 @@ class LexerCool:
                 self.avancar()
                 if self.fim():
                     break
-                lexema.append(escapes.get(self.avancar(), self.fonte[self.i - 1]))
+                char_escape = escapes.get(self.avancar(), self.codigo[self.i - 1])
+                lexema.append(char_escape)
             else:
                 lexema.append(self.avancar())
         sys.exit()
@@ -275,10 +276,10 @@ class LexerCool:
         sys.exit()
 
 
-def salvar_saida(caminho_fonte, tokens):
-    caminho_saida = Path(caminho_fonte).with_suffix(".lex.json")
+def salvar_saida(caminho_codigo, tokens):
+    caminho_saida = Path(caminho_codigo).with_suffix(".lex.json")
     saida = {
-        "arquivo_fonte": caminho_fonte,
+        "arquivo_codigo": caminho_codigo,
         "quantidade_tokens": len(tokens),
         "tokens": [
             {
@@ -301,10 +302,10 @@ def main():
         print("Uso: python lexer_cool.py <arquivo.cl>")
         sys.exit()
 
-    caminho_fonte = sys.argv[1]
-    lexer = LexerCool(Path(caminho_fonte).read_text(encoding="utf-8"))
+    caminho_codigo = sys.argv[1]
+    lexer = LexerCool(Path(caminho_codigo).read_text(encoding="utf-8"))
     tokens = lexer.tokenizar()
-    caminho_saida = salvar_saida(caminho_fonte, tokens)
+    caminho_saida = salvar_saida(caminho_codigo, tokens)
 
     print(f"Saída léxica gravada em: {caminho_saida}")
     print(f"Tokens reconhecidos: {len(tokens)}")
