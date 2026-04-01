@@ -1,4 +1,5 @@
 from enum import Enum, auto
+from dataclasses import dataclass
 from pathlib import Path
 import json
 import sys
@@ -55,6 +56,7 @@ class TipoToken(Enum):
     EOF = auto()
 
 
+@dataclass
 class Token:
     tipo: TipoToken
     lexema: str
