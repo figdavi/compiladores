@@ -1,0 +1,78 @@
+{
+  "arquivo_codigo": "testes_cool_cl/testes_validos/v12_quebra_de_linha_escapada_na_string.cl",
+  "quantidade_tokens": 12,
+  "tokens": [
+    {
+      "tipo": "CLASS",
+      "lexema": "class",
+      "linha": 1,
+      "coluna": 1
+    },
+    {
+      "tipo": "TYPE_ID",
+      "lexema": "Main",
+      "linha": 1,
+      "coluna": 7
+    },
+    {
+      "tipo": "LBRACE",
+      "lexema": "{",
+      "linha": 1,
+      "coluna": 12
+    },
+    {
+      "tipo": "OBJECT_ID",
+      "lexema": "s",
+      "linha": 2,
+      "coluna": 3
+    },
+    {
+      "tipo": "COLON",
+      "lexema": ":",
+      "linha": 2,
+      "coluna": 5
+    },
+    {
+      "tipo": "TYPE_ID",
+      "lexema": "String",
+      "linha": 2,
+      "coluna": 7
+    },
+    {
+      "tipo": "ASSIGN",
+      "lexema": "<-",
+      "linha": 2,
+      "coluna": 14
+    },
+    {
+      "tipo": "STR_CONST",
+      "lexema": "Hello\nWorld",
+      "linha": 2,
+      "coluna": 17
+    },
+    {
+      "tipo": "SEMICOLON",
+      "lexema": ";",
+      "linha": 3,
+      "coluna": 7
+    },
+    {
+      "tipo": "RBRACE",
+      "lexema": "}",
+      "linha": 4,
+      "coluna": 1
+    },
+    {
+      "tipo": "SEMICOLON",
+      "lexema": ";",
+      "linha": 4,
+      "coluna": 2
+    },
+    {
+      "tipo": "EOF",
+      "lexema": "",
+      "linha": 5,
+      "coluna": 1
+    }
+  ]
+}

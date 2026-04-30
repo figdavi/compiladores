@@ -1,13 +1,14 @@
-Pasta de testes para o analisador léxico da linguagem Cool.
+Bateria de testes da análise léxica e sintática de Cool
 
 Estrutura:
-- testes_validos/
-- testes_invalidos/
-- testes_mistos/
+- validos
+- erro_sintatico
+- erro_lexico
 
-Observações:
-1. O arquivo i9_booleano_com_inicial_maiuscula.cl não deve gerar erro léxico,
-   mas serve para verificar se True/FALSE NÃO viram os tokens booleanos TRUE/FALSE.
-2. O caso de caractere nulo real foi deixado em um script Python:
-   - exemplo_python_caractere_nulo_real.py
-   Isso foi feito porque inserir \x00 diretamente em um arquivo .cl comum pode ser inconveniente.
+Exemplo de execução:
+python parser_cool.py testes_cool/validos/teste_01_minimo.cl
+
+Status esperado:
+- arquivos em validos -> sucesso
+- arquivos em erro_sintatico -> erro_sintatico
+- arquivos em erro_lexico -> erro_lexico
