@@ -1,0 +1,83 @@
+{
+  "arquivo_codigo": "testes_cool_cl/validos/teste_06_let.cl",
+  "status": "sucesso",
+  "quantidade_tokens": 30,
+  "quantidade_erros_lexicos": 0,
+  "erros_lexicos": [],
+  "erro_sintatico": null,
+  "ast": {
+    "no": "Programa",
+    "linha": 1,
+    "coluna": 1,
+    "classes": [
+      {
+        "no": "Classe",
+        "linha": 1,
+        "coluna": 1,
+        "nome": "Main",
+        "pai": null,
+        "features": [
+          {
+            "no": "Metodo",
+            "linha": 2,
+            "coluna": 3,
+            "nome": "main",
+            "formais": [],
+            "tipo_retorno": "Object",
+            "corpo": {
+              "no": "Let",
+              "linha": 3,
+              "coluna": 5,
+              "declaracoes": [
+                {
+                  "no": "DeclaracaoLet",
+                  "linha": 3,
+                  "coluna": 9,
+                  "nome": "a",
+                  "tipo": "Int",
+                  "inicializacao": {
+                    "no": "Inteiro",
+                    "linha": 3,
+                    "coluna": 20,
+                    "valor": 1
+                  }
+                },
+                {
+                  "no": "DeclaracaoLet",
+                  "linha": 3,
+                  "coluna": 23,
+                  "nome": "b",
+                  "tipo": "Int",
+                  "inicializacao": {
+                    "no": "Inteiro",
+                    "linha": 3,
+                    "coluna": 34,
+                    "valor": 2
+                  }
+                }
+              ],
+              "corpo": {
+                "no": "Binario",
+                "linha": 3,
+                "coluna": 41,
+                "operador": "+",
+                "esquerda": {
+                  "no": "Identificador",
+                  "linha": 3,
+                  "coluna": 39,
+                  "nome": "a"
+                },
+                "direita": {
+                  "no": "Identificador",
+                  "linha": 3,
+                  "coluna": 43,
+                  "nome": "b"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -9,6 +9,7 @@ from lexer_cool import Lexer, TipoToken
 # Erro sintático
 # =========================
 
+
 class ErroSintatico(Exception):
     def __init__(self, mensagem, token):
         self.mensagem = mensagem
@@ -44,8 +45,9 @@ def no(tipo_no, token, **campos):
 
 
 # =========================
-# Parser Cool 
+# Parser Cool
 # =========================
+
 
 class ParserCool:
     # Precedência da Cool: quanto maior, mais forte
@@ -289,8 +291,9 @@ class ParserCool:
             dentro de um let
             dentro de um case
             nos argumentos de chamadas de método"""
+
     def expr(self):
-        return self.expr_prec(0)
+        return self.expr_prec(0)  # a + b * c
 
     def expr_prec(self, min_prec):
         # Começa lendo número, string, identificador, if, while, let, case, new, not, isvoid, etc.
@@ -311,7 +314,7 @@ class ParserCool:
 
             if token.tipo not in self.PREC:
                 break
-            
+
             # Precedência do operador
             prec = self.PREC[token.tipo]
 
@@ -742,6 +745,7 @@ class ParserCool:
 # Saída JSON
 # =========================
 
+
 def salvar_saida(caminho_codigo, saida):
     caminho_saida = Path(caminho_codigo).with_suffix(".ast.json")
 
@@ -764,7 +768,7 @@ def main():
     # O parser usa os tokens para verificar a estrutura sintática
     lexer = Lexer(codigo)
     tokens = lexer.tokenizar()
-    erros_lexicos = getattr(lexer, "erros", []) # lista de erros ou uma lista vazia
+    erros_lexicos = getattr(lexer, "erros", [])  # lista de erros ou uma lista vazia
 
     # Estrutura inicial da saída:
     saida = {
@@ -782,9 +786,10 @@ def main():
     else:
         try:
             parser = ParserCool(tokens)
-            saida["ast"] = parser.parse() # Início da análise sintática 
+            saida["ast"] = parser.parse()  # Início da análise sintática
 
         except ErroSintatico as erro:
+            print(erro)
             saida["status"] = "erro_sintatico"
             saida["erro_sintatico"] = erro.para_dict()
 

@@ -1,0 +1,310 @@
+{
+  "arquivo_codigo": "cool_testes_semanticos/validos/02_valido_heranca_dispatch.cl",
+  "status": "sucesso",
+  "quantidade_tokens": 75,
+  "quantidade_erros_lexicos": 0,
+  "erros_lexicos": [],
+  "erro_sintatico": null,
+  "quantidade_erros_semanticos": 0,
+  "erros_semanticos": [],
+  "tabela_classes": {
+    "Object": {
+      "pai": null,
+      "basica": true,
+      "atributos": {},
+      "metodos": {
+        "abort": {
+          "formais": [],
+          "tipo_retorno": "Object",
+          "classe": "Object"
+        },
+        "type_name": {
+          "formais": [],
+          "tipo_retorno": "String",
+          "classe": "Object"
+        },
+        "copy": {
+          "formais": [],
+          "tipo_retorno": "SELF_TYPE",
+          "classe": "Object"
+        }
+      }
+    },
+    "IO": {
+      "pai": "Object",
+      "basica": true,
+      "atributos": {},
+      "metodos": {
+        "out_string": {
+          "formais": [
+            {
+              "nome": "x",
+              "tipo": "String"
+            }
+          ],
+          "tipo_retorno": "SELF_TYPE",
+          "classe": "IO"
+        },
+        "out_int": {
+          "formais": [
+            {
+              "nome": "x",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "SELF_TYPE",
+          "classe": "IO"
+        },
+        "in_string": {
+          "formais": [],
+          "tipo_retorno": "String",
+          "classe": "IO"
+        },
+        "in_int": {
+          "formais": [],
+          "tipo_retorno": "Int",
+          "classe": "IO"
+        }
+      }
+    },
+    "Int": {
+      "pai": "Object",
+      "basica": true,
+      "atributos": {},
+      "metodos": {}
+    },
+    "String": {
+      "pai": "Object",
+      "basica": true,
+      "atributos": {},
+      "metodos": {
+        "length": {
+          "formais": [],
+          "tipo_retorno": "Int",
+          "classe": "String"
+        },
+        "concat": {
+          "formais": [
+            {
+              "nome": "s",
+              "tipo": "String"
+            }
+          ],
+          "tipo_retorno": "String",
+          "classe": "String"
+        },
+        "substr": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            },
+            {
+              "nome": "l",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "String",
+          "classe": "String"
+        }
+      }
+    },
+    "Bool": {
+      "pai": "Object",
+      "basica": true,
+      "atributos": {},
+      "metodos": {}
+    },
+    "A": {
+      "pai": "Object",
+      "basica": false,
+      "atributos": {},
+      "metodos": {
+        "value": {
+          "formais": [],
+          "tipo_retorno": "Int",
+          "classe": "A"
+        },
+        "same": {
+          "formais": [],
+          "tipo_retorno": "SELF_TYPE",
+          "classe": "A"
+        }
+      }
+    },
+    "B": {
+      "pai": "A",
+      "basica": false,
+      "atributos": {},
+      "metodos": {
+        "value": {
+          "formais": [],
+          "tipo_retorno": "Int",
+          "classe": "B"
+        }
+      }
+    },
+    "Main": {
+      "pai": "Object",
+      "basica": false,
+      "atributos": {
+        "a": {
+          "tipo": "A",
+          "classe": "Main"
+        }
+      },
+      "metodos": {
+        "main": {
+          "formais": [],
+          "tipo_retorno": "Object",
+          "classe": "Main"
+        }
+      }
+    }
+  },
+  "ast": {
+    "no": "Programa",
+    "linha": 1,
+    "coluna": 1,
+    "classes": [
+      {
+        "no": "Classe",
+        "linha": 1,
+        "coluna": 1,
+        "nome": "A",
+        "pai": null,
+        "features": [
+          {
+            "no": "Metodo",
+            "linha": 2,
+            "coluna": 5,
+            "nome": "value",
+            "formais": [],
+            "tipo_retorno": "Int",
+            "corpo": {
+              "no": "Inteiro",
+              "linha": 3,
+              "coluna": 9,
+              "valor": 1,
+              "tipo_inferido": "Int"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 6,
+            "coluna": 5,
+            "nome": "same",
+            "formais": [],
+            "tipo_retorno": "SELF_TYPE",
+            "corpo": {
+              "no": "Identificador",
+              "linha": 7,
+              "coluna": 9,
+              "nome": "self",
+              "tipo_inferido": "SELF_TYPE"
+            }
+          }
+        ]
+      },
+      {
+        "no": "Classe",
+        "linha": 11,
+        "coluna": 1,
+        "nome": "B",
+        "pai": "A",
+        "features": [
+          {
+            "no": "Metodo",
+            "linha": 12,
+            "coluna": 5,
+            "nome": "value",
+            "formais": [],
+            "tipo_retorno": "Int",
+            "corpo": {
+              "no": "Inteiro",
+              "linha": 13,
+              "coluna": 9,
+              "valor": 2,
+              "tipo_inferido": "Int"
+            }
+          }
+        ]
+      },
+      {
+        "no": "Classe",
+        "linha": 17,
+        "coluna": 1,
+        "nome": "Main",
+        "pai": null,
+        "features": [
+          {
+            "no": "Atributo",
+            "linha": 18,
+            "coluna": 5,
+            "nome": "a",
+            "tipo": "A",
+            "inicializacao": {
+              "no": "New",
+              "linha": 18,
+              "coluna": 14,
+              "tipo": "B",
+              "tipo_inferido": "B"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 20,
+            "coluna": 5,
+            "nome": "main",
+            "formais": [],
+            "tipo_retorno": "Object",
+            "corpo": {
+              "no": "Bloco",
+              "linha": 21,
+              "coluna": 9,
+              "expressoes": [
+                {
+                  "no": "Dispatch",
+                  "linha": 22,
+                  "coluna": 14,
+                  "alvo": {
+                    "no": "Identificador",
+                    "linha": 22,
+                    "coluna": 13,
+                    "nome": "a",
+                    "tipo_inferido": "A"
+                  },
+                  "metodo": "value",
+                  "argumentos": [],
+                  "tipo_inferido": "Int"
+                },
+                {
+                  "no": "Atribuicao",
+                  "linha": 23,
+                  "coluna": 15,
+                  "nome": "a",
+                  "valor": {
+                    "no": "New",
+                    "linha": 23,
+                    "coluna": 18,
+                    "tipo": "B",
+                    "tipo_inferido": "B"
+                  },
+                  "tipo_inferido": "B"
+                },
+                {
+                  "no": "Inteiro",
+                  "linha": 24,
+                  "coluna": 13,
+                  "valor": 0,
+                  "tipo_inferido": "Int"
+                }
+              ],
+              "tipo_inferido": "Int"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
