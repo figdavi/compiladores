@@ -1,0 +1,172 @@
+{
+  "functions": [
+    {
+      "args": [],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 10
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "x_0",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 20
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "y_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "x_0",
+            "y_1"
+          ],
+          "dest": "_t2",
+          "funcs": [],
+          "labels": [],
+          "op": "lt",
+          "type": "bool"
+        },
+        {
+          "args": [
+            "_t2"
+          ],
+          "funcs": [],
+          "labels": [
+            "if_then_0",
+            "if_else_1"
+          ],
+          "op": "br"
+        },
+        {
+          "label": "if_then_0"
+        },
+        {
+          "args": [
+            "x_0",
+            "y_1"
+          ],
+          "dest": "_t4",
+          "funcs": [],
+          "labels": [],
+          "op": "add",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t4"
+          ],
+          "dest": "_t3",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [
+            "if_end_2"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "if_else_1"
+        },
+        {
+          "args": [
+            "x_0",
+            "y_1"
+          ],
+          "dest": "_t5",
+          "funcs": [],
+          "labels": [],
+          "op": "sub",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t5"
+          ],
+          "dest": "_t3",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [
+            "if_end_2"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "if_end_2"
+        },
+        {
+          "args": [
+            "_t3"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Main_main",
+      "type": "int"
+    },
+    {
+      "args": [],
+      "instrs": [
+        {
+          "args": [],
+          "dest": "__main_result",
+          "funcs": [
+            "Main_main"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "__main_result"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "print"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "main",
+      "type": null
+    }
+  ],
+  "imports": []
+}

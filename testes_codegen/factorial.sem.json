@@ -1,0 +1,284 @@
+{
+  "arquivo_codigo": "testes_codegen/factorial.cl",
+  "status": "sucesso",
+  "quantidade_tokens": 50,
+  "quantidade_erros_lexicos": 0,
+  "erros_lexicos": [],
+  "erro_sintatico": null,
+  "quantidade_erros_semanticos": 0,
+  "erros_semanticos": [],
+  "tabela_classes": {
+    "Object": {
+      "pai": null,
+      "basica": true,
+      "atributos": {},
+      "metodos": {
+        "abort": {
+          "formais": [],
+          "tipo_retorno": "Object",
+          "classe": "Object"
+        },
+        "type_name": {
+          "formais": [],
+          "tipo_retorno": "String",
+          "classe": "Object"
+        },
+        "copy": {
+          "formais": [],
+          "tipo_retorno": "SELF_TYPE",
+          "classe": "Object"
+        }
+      }
+    },
+    "IO": {
+      "pai": "Object",
+      "basica": true,
+      "atributos": {},
+      "metodos": {
+        "out_string": {
+          "formais": [
+            {
+              "nome": "x",
+              "tipo": "String"
+            }
+          ],
+          "tipo_retorno": "SELF_TYPE",
+          "classe": "IO"
+        },
+        "out_int": {
+          "formais": [
+            {
+              "nome": "x",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "SELF_TYPE",
+          "classe": "IO"
+        },
+        "in_string": {
+          "formais": [],
+          "tipo_retorno": "String",
+          "classe": "IO"
+        },
+        "in_int": {
+          "formais": [],
+          "tipo_retorno": "Int",
+          "classe": "IO"
+        }
+      }
+    },
+    "Int": {
+      "pai": "Object",
+      "basica": true,
+      "atributos": {},
+      "metodos": {}
+    },
+    "String": {
+      "pai": "Object",
+      "basica": true,
+      "atributos": {},
+      "metodos": {
+        "length": {
+          "formais": [],
+          "tipo_retorno": "Int",
+          "classe": "String"
+        },
+        "concat": {
+          "formais": [
+            {
+              "nome": "s",
+              "tipo": "String"
+            }
+          ],
+          "tipo_retorno": "String",
+          "classe": "String"
+        },
+        "substr": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            },
+            {
+              "nome": "l",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "String",
+          "classe": "String"
+        }
+      }
+    },
+    "Bool": {
+      "pai": "Object",
+      "basica": true,
+      "atributos": {},
+      "metodos": {}
+    },
+    "Main": {
+      "pai": "IO",
+      "basica": false,
+      "atributos": {},
+      "metodos": {
+        "factorial": {
+          "formais": [
+            {
+              "nome": "n",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "Int",
+          "classe": "Main"
+        },
+        "main": {
+          "formais": [],
+          "tipo_retorno": "Object",
+          "classe": "Main"
+        }
+      }
+    }
+  },
+  "ast": {
+    "no": "Programa",
+    "linha": 1,
+    "coluna": 1,
+    "classes": [
+      {
+        "no": "Classe",
+        "linha": 1,
+        "coluna": 1,
+        "nome": "Main",
+        "pai": "IO",
+        "features": [
+          {
+            "no": "Metodo",
+            "linha": 2,
+            "coluna": 5,
+            "nome": "factorial",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 2,
+                "coluna": 15,
+                "nome": "n",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "Int",
+            "corpo": {
+              "no": "If",
+              "linha": 3,
+              "coluna": 9,
+              "condicao": {
+                "no": "Binario",
+                "linha": 3,
+                "coluna": 14,
+                "operador": "=",
+                "esquerda": {
+                  "no": "Identificador",
+                  "linha": 3,
+                  "coluna": 12,
+                  "nome": "n",
+                  "tipo_inferido": "Int"
+                },
+                "direita": {
+                  "no": "Inteiro",
+                  "linha": 3,
+                  "coluna": 16,
+                  "valor": 0,
+                  "tipo_inferido": "Int"
+                },
+                "tipo_inferido": "Bool"
+              },
+              "entao": {
+                "no": "Inteiro",
+                "linha": 4,
+                "coluna": 13,
+                "valor": 1,
+                "tipo_inferido": "Int"
+              },
+              "senao": {
+                "no": "Binario",
+                "linha": 6,
+                "coluna": 15,
+                "operador": "*",
+                "esquerda": {
+                  "no": "Identificador",
+                  "linha": 6,
+                  "coluna": 13,
+                  "nome": "n",
+                  "tipo_inferido": "Int"
+                },
+                "direita": {
+                  "no": "ChamadaSimples",
+                  "linha": 6,
+                  "coluna": 17,
+                  "metodo": "factorial",
+                  "argumentos": [
+                    {
+                      "no": "Binario",
+                      "linha": 6,
+                      "coluna": 29,
+                      "operador": "-",
+                      "esquerda": {
+                        "no": "Identificador",
+                        "linha": 6,
+                        "coluna": 27,
+                        "nome": "n",
+                        "tipo_inferido": "Int"
+                      },
+                      "direita": {
+                        "no": "Inteiro",
+                        "linha": 6,
+                        "coluna": 31,
+                        "valor": 1,
+                        "tipo_inferido": "Int"
+                      },
+                      "tipo_inferido": "Int"
+                    }
+                  ],
+                  "tipo_inferido": "Int"
+                },
+                "tipo_inferido": "Int"
+              },
+              "tipo_inferido": "Int"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 10,
+            "coluna": 5,
+            "nome": "main",
+            "formais": [],
+            "tipo_retorno": "Object",
+            "corpo": {
+              "no": "ChamadaSimples",
+              "linha": 11,
+              "coluna": 9,
+              "metodo": "out_int",
+              "argumentos": [
+                {
+                  "no": "ChamadaSimples",
+                  "linha": 11,
+                  "coluna": 17,
+                  "metodo": "factorial",
+                  "argumentos": [
+                    {
+                      "no": "Inteiro",
+                      "linha": 11,
+                      "coluna": 27,
+                      "valor": 5,
+                      "tipo_inferido": "Int"
+                    }
+                  ],
+                  "tipo_inferido": "Int"
+                }
+              ],
+              "tipo_inferido": "SELF_TYPE"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

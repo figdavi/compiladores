@@ -1,12 +1,33 @@
 {
   "arquivo_codigo": "exemplo.cl",
-  "status": "sucesso",
-  "quantidade_tokens": 75,
+  "status": "erro_semantico",
+  "quantidade_tokens": 540,
   "quantidade_erros_lexicos": 0,
   "erros_lexicos": [],
   "erro_sintatico": null,
-  "quantidade_erros_semanticos": 0,
-  "erros_semanticos": [],
+  "quantidade_erros_semanticos": 4,
+  "erros_semanticos": [
+    {
+      "mensagem": "Método 'init2' não encontrado na classe 'Cons'",
+      "linha": 80,
+      "coluna": 14
+    },
+    {
+      "mensagem": "O corpo do método 'insert' possui tipo 'Object', mas o retorno declarado é 'List'",
+      "linha": 78,
+      "coluna": 2
+    },
+    {
+      "mensagem": "O corpo do método 'sort' possui tipo 'Bool', mas o retorno declarado é 'List'",
+      "linha": 103,
+      "coluna": 2
+    },
+    {
+      "mensagem": "Inicialização inválida no let: expressão de tipo 'String' não conforma ao tipo declarado 'Int'",
+      "linha": 122,
+      "coluna": 8
+    }
+  ],
   "tabela_classes": {
     "Object": {
       "pai": null,
@@ -115,45 +136,220 @@
       "atributos": {},
       "metodos": {}
     },
-    "B": {
-      "pai": "A",
+    "List": {
+      "pai": "IO",
       "basica": false,
       "atributos": {},
       "metodos": {
-        "value": {
+        "isNil": {
+          "formais": [],
+          "tipo_retorno": "Bool",
+          "classe": "List"
+        },
+        "cons": {
+          "formais": [
+            {
+              "nome": "hd",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "Cons",
+          "classe": "List"
+        },
+        "car": {
           "formais": [],
           "tipo_retorno": "Int",
-          "classe": "B"
+          "classe": "List"
+        },
+        "cdr": {
+          "formais": [],
+          "tipo_retorno": "List",
+          "classe": "List"
+        },
+        "rev": {
+          "formais": [],
+          "tipo_retorno": "List",
+          "classe": "List"
+        },
+        "sort": {
+          "formais": [],
+          "tipo_retorno": "List",
+          "classe": "List"
+        },
+        "insert": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "List",
+          "classe": "List"
+        },
+        "rcons": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "List",
+          "classe": "List"
+        },
+        "print_list": {
+          "formais": [],
+          "tipo_retorno": "Object",
+          "classe": "List"
         }
       }
     },
-    "A": {
-      "pai": "Object",
+    "Cons": {
+      "pai": "List",
+      "basica": false,
+      "atributos": {
+        "xcar": {
+          "tipo": "Int",
+          "classe": "Cons"
+        },
+        "xcdr": {
+          "tipo": "List",
+          "classe": "Cons"
+        }
+      },
+      "metodos": {
+        "isNil": {
+          "formais": [],
+          "tipo_retorno": "Bool",
+          "classe": "Cons"
+        },
+        "init": {
+          "formais": [
+            {
+              "nome": "hd",
+              "tipo": "Int"
+            },
+            {
+              "nome": "tl",
+              "tipo": "List"
+            }
+          ],
+          "tipo_retorno": "Cons",
+          "classe": "Cons"
+        },
+        "car": {
+          "formais": [],
+          "tipo_retorno": "Int",
+          "classe": "Cons"
+        },
+        "cdr": {
+          "formais": [],
+          "tipo_retorno": "List",
+          "classe": "Cons"
+        },
+        "rev": {
+          "formais": [],
+          "tipo_retorno": "List",
+          "classe": "Cons"
+        },
+        "sort": {
+          "formais": [],
+          "tipo_retorno": "List",
+          "classe": "Cons"
+        },
+        "insert": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "List",
+          "classe": "Cons"
+        },
+        "rcons": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "List",
+          "classe": "Cons"
+        },
+        "print_list": {
+          "formais": [],
+          "tipo_retorno": "Object",
+          "classe": "Cons"
+        }
+      }
+    },
+    "Nil": {
+      "pai": "List",
       "basica": false,
       "atributos": {},
       "metodos": {
-        "value": {
+        "isNil": {
           "formais": [],
-          "tipo_retorno": "Int",
-          "classe": "A"
+          "tipo_retorno": "Bool",
+          "classe": "Nil"
         },
-        "same": {
+        "rev": {
           "formais": [],
-          "tipo_retorno": "SELF_TYPE",
-          "classe": "A"
+          "tipo_retorno": "List",
+          "classe": "Nil"
+        },
+        "sort": {
+          "formais": [],
+          "tipo_retorno": "List",
+          "classe": "Nil"
+        },
+        "insert": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "List",
+          "classe": "Nil"
+        },
+        "rcons": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "List",
+          "classe": "Nil"
+        },
+        "print_list": {
+          "formais": [],
+          "tipo_retorno": "Object",
+          "classe": "Nil"
         }
       }
     },
     "Main": {
-      "pai": "Object",
+      "pai": "IO",
       "basica": false,
       "atributos": {
-        "a": {
-          "tipo": "A",
+        "l": {
+          "tipo": "List",
           "classe": "Main"
         }
       },
       "metodos": {
+        "iota": {
+          "formais": [
+            {
+              "nome": "i",
+              "tipo": "Int"
+            }
+          ],
+          "tipo_retorno": "List",
+          "classe": "Main"
+        },
         "main": {
           "formais": [],
           "tipo_retorno": "Object",
@@ -164,143 +360,1134 @@
   },
   "ast": {
     "no": "Programa",
-    "linha": 1,
+    "linha": 24,
     "coluna": 1,
     "classes": [
       {
         "no": "Classe",
-        "linha": 1,
+        "linha": 24,
         "coluna": 1,
-        "nome": "B",
-        "pai": "A",
+        "nome": "List",
+        "pai": "IO",
         "features": [
           {
             "no": "Metodo",
-            "linha": 2,
-            "coluna": 5,
-            "nome": "value",
+            "linha": 28,
+            "coluna": 2,
+            "nome": "isNil",
             "formais": [],
-            "tipo_retorno": "Int",
+            "tipo_retorno": "Bool",
             "corpo": {
-              "no": "Inteiro",
-              "linha": 3,
-              "coluna": 9,
-              "valor": 2,
-              "tipo_inferido": "Int"
+              "no": "Bloco",
+              "linha": 28,
+              "coluna": 19,
+              "expressoes": [
+                {
+                  "no": "ChamadaSimples",
+                  "linha": 28,
+                  "coluna": 21,
+                  "metodo": "abort",
+                  "argumentos": [],
+                  "tipo_inferido": "Object"
+                },
+                {
+                  "no": "Booleano",
+                  "linha": 28,
+                  "coluna": 30,
+                  "valor": true,
+                  "tipo_inferido": "Bool"
+                }
+              ],
+              "tipo_inferido": "Bool"
             }
-          }
-        ]
-      },
-      {
-        "no": "Classe",
-        "linha": 7,
-        "coluna": 1,
-        "nome": "A",
-        "pai": null,
-        "features": [
+          },
           {
             "no": "Metodo",
-            "linha": 8,
-            "coluna": 5,
-            "nome": "value",
+            "linha": 30,
+            "coluna": 2,
+            "nome": "cons",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 30,
+                "coluna": 7,
+                "nome": "hd",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "Cons",
+            "corpo": {
+              "no": "Let",
+              "linha": 31,
+              "coluna": 4,
+              "declaracoes": [
+                {
+                  "no": "DeclaracaoLet",
+                  "linha": 31,
+                  "coluna": 8,
+                  "nome": "new_cell",
+                  "tipo": "Cons",
+                  "inicializacao": {
+                    "no": "New",
+                    "linha": 31,
+                    "coluna": 27,
+                    "tipo": "Cons",
+                    "tipo_inferido": "Cons"
+                  }
+                }
+              ],
+              "corpo": {
+                "no": "Dispatch",
+                "linha": 32,
+                "coluna": 11,
+                "alvo": {
+                  "no": "Identificador",
+                  "linha": 32,
+                  "coluna": 3,
+                  "nome": "new_cell",
+                  "tipo_inferido": "Cons"
+                },
+                "metodo": "init",
+                "argumentos": [
+                  {
+                    "no": "Identificador",
+                    "linha": 32,
+                    "coluna": 17,
+                    "nome": "hd",
+                    "tipo_inferido": "Int"
+                  },
+                  {
+                    "no": "Identificador",
+                    "linha": 32,
+                    "coluna": 20,
+                    "nome": "self",
+                    "tipo_inferido": "SELF_TYPE"
+                  }
+                ],
+                "tipo_inferido": "Cons"
+              },
+              "tipo_inferido": "Cons"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 41,
+            "coluna": 2,
+            "nome": "car",
             "formais": [],
             "tipo_retorno": "Int",
             "corpo": {
-              "no": "Inteiro",
-              "linha": 9,
-              "coluna": 9,
-              "valor": 1,
+              "no": "Bloco",
+              "linha": 41,
+              "coluna": 16,
+              "expressoes": [
+                {
+                  "no": "ChamadaSimples",
+                  "linha": 41,
+                  "coluna": 18,
+                  "metodo": "abort",
+                  "argumentos": [],
+                  "tipo_inferido": "Object"
+                },
+                {
+                  "no": "New",
+                  "linha": 41,
+                  "coluna": 27,
+                  "tipo": "Int",
+                  "tipo_inferido": "Int"
+                }
+              ],
               "tipo_inferido": "Int"
             }
           },
           {
             "no": "Metodo",
-            "linha": 12,
-            "coluna": 5,
-            "nome": "same",
+            "linha": 43,
+            "coluna": 2,
+            "nome": "cdr",
             "formais": [],
-            "tipo_retorno": "SELF_TYPE",
+            "tipo_retorno": "List",
             "corpo": {
-              "no": "Identificador",
-              "linha": 13,
-              "coluna": 9,
-              "nome": "self",
-              "tipo_inferido": "SELF_TYPE"
+              "no": "Bloco",
+              "linha": 43,
+              "coluna": 17,
+              "expressoes": [
+                {
+                  "no": "ChamadaSimples",
+                  "linha": 43,
+                  "coluna": 19,
+                  "metodo": "abort",
+                  "argumentos": [],
+                  "tipo_inferido": "Object"
+                },
+                {
+                  "no": "New",
+                  "linha": 43,
+                  "coluna": 28,
+                  "tipo": "List",
+                  "tipo_inferido": "List"
+                }
+              ],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 45,
+            "coluna": 2,
+            "nome": "rev",
+            "formais": [],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "ChamadaSimples",
+              "linha": 45,
+              "coluna": 17,
+              "metodo": "cdr",
+              "argumentos": [],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 47,
+            "coluna": 2,
+            "nome": "sort",
+            "formais": [],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "ChamadaSimples",
+              "linha": 47,
+              "coluna": 18,
+              "metodo": "cdr",
+              "argumentos": [],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 49,
+            "coluna": 2,
+            "nome": "insert",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 49,
+                "coluna": 9,
+                "nome": "i",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "ChamadaSimples",
+              "linha": 49,
+              "coluna": 27,
+              "metodo": "cdr",
+              "argumentos": [],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 51,
+            "coluna": 2,
+            "nome": "rcons",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 51,
+                "coluna": 8,
+                "nome": "i",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "ChamadaSimples",
+              "linha": 51,
+              "coluna": 26,
+              "metodo": "cdr",
+              "argumentos": [],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 53,
+            "coluna": 2,
+            "nome": "print_list",
+            "formais": [],
+            "tipo_retorno": "Object",
+            "corpo": {
+              "no": "ChamadaSimples",
+              "linha": 53,
+              "coluna": 26,
+              "metodo": "abort",
+              "argumentos": [],
+              "tipo_inferido": "Object"
             }
           }
         ]
       },
       {
         "no": "Classe",
-        "linha": 17,
+        "linha": 56,
         "coluna": 1,
-        "nome": "Main",
-        "pai": null,
+        "nome": "Cons",
+        "pai": "List",
         "features": [
           {
             "no": "Atributo",
-            "linha": 18,
-            "coluna": 5,
-            "nome": "a",
-            "tipo": "A",
-            "inicializacao": {
-              "no": "New",
-              "linha": 18,
-              "coluna": 14,
-              "tipo": "B",
-              "tipo_inferido": "B"
+            "linha": 57,
+            "coluna": 2,
+            "nome": "xcar",
+            "tipo": "Int",
+            "inicializacao": null
+          },
+          {
+            "no": "Atributo",
+            "linha": 58,
+            "coluna": 2,
+            "nome": "xcdr",
+            "tipo": "List",
+            "inicializacao": null
+          },
+          {
+            "no": "Metodo",
+            "linha": 60,
+            "coluna": 2,
+            "nome": "isNil",
+            "formais": [],
+            "tipo_retorno": "Bool",
+            "corpo": {
+              "no": "Booleano",
+              "linha": 60,
+              "coluna": 19,
+              "valor": false,
+              "tipo_inferido": "Bool"
             }
           },
           {
             "no": "Metodo",
-            "linha": 20,
-            "coluna": 5,
+            "linha": 62,
+            "coluna": 2,
+            "nome": "init",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 62,
+                "coluna": 7,
+                "nome": "hd",
+                "tipo": "Int"
+              },
+              {
+                "no": "Formal",
+                "linha": 62,
+                "coluna": 17,
+                "nome": "tl",
+                "tipo": "List"
+              }
+            ],
+            "tipo_retorno": "Cons",
+            "corpo": {
+              "no": "Bloco",
+              "linha": 63,
+              "coluna": 3,
+              "expressoes": [
+                {
+                  "no": "Atribuicao",
+                  "linha": 64,
+                  "coluna": 8,
+                  "nome": "xcar",
+                  "valor": {
+                    "no": "Identificador",
+                    "linha": 64,
+                    "coluna": 11,
+                    "nome": "hd",
+                    "tipo_inferido": "Int"
+                  },
+                  "tipo_inferido": "Int"
+                },
+                {
+                  "no": "Atribuicao",
+                  "linha": 65,
+                  "coluna": 8,
+                  "nome": "xcdr",
+                  "valor": {
+                    "no": "Identificador",
+                    "linha": 65,
+                    "coluna": 11,
+                    "nome": "tl",
+                    "tipo_inferido": "List"
+                  },
+                  "tipo_inferido": "List"
+                },
+                {
+                  "no": "Identificador",
+                  "linha": 66,
+                  "coluna": 3,
+                  "nome": "self",
+                  "tipo_inferido": "SELF_TYPE"
+                }
+              ],
+              "tipo_inferido": "SELF_TYPE"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 70,
+            "coluna": 2,
+            "nome": "car",
+            "formais": [],
+            "tipo_retorno": "Int",
+            "corpo": {
+              "no": "Identificador",
+              "linha": 70,
+              "coluna": 16,
+              "nome": "xcar",
+              "tipo_inferido": "Int"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 72,
+            "coluna": 2,
+            "nome": "cdr",
+            "formais": [],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "Identificador",
+              "linha": 72,
+              "coluna": 17,
+              "nome": "xcdr",
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 74,
+            "coluna": 2,
+            "nome": "rev",
+            "formais": [],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "Dispatch",
+              "linha": 74,
+              "coluna": 29,
+              "alvo": {
+                "no": "Dispatch",
+                "linha": 74,
+                "coluna": 22,
+                "alvo": {
+                  "no": "Identificador",
+                  "linha": 74,
+                  "coluna": 18,
+                  "nome": "xcdr",
+                  "tipo_inferido": "List"
+                },
+                "metodo": "rev",
+                "argumentos": [],
+                "tipo_inferido": "List"
+              },
+              "metodo": "rcons",
+              "argumentos": [
+                {
+                  "no": "Identificador",
+                  "linha": 74,
+                  "coluna": 36,
+                  "nome": "xcar",
+                  "tipo_inferido": "Int"
+                }
+              ],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 76,
+            "coluna": 2,
+            "nome": "sort",
+            "formais": [],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "Dispatch",
+              "linha": 76,
+              "coluna": 31,
+              "alvo": {
+                "no": "Dispatch",
+                "linha": 76,
+                "coluna": 23,
+                "alvo": {
+                  "no": "Identificador",
+                  "linha": 76,
+                  "coluna": 19,
+                  "nome": "xcdr",
+                  "tipo_inferido": "List"
+                },
+                "metodo": "sort",
+                "argumentos": [],
+                "tipo_inferido": "List"
+              },
+              "metodo": "insert",
+              "argumentos": [
+                {
+                  "no": "Identificador",
+                  "linha": 76,
+                  "coluna": 39,
+                  "nome": "xcar",
+                  "tipo_inferido": "Int"
+                }
+              ],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 78,
+            "coluna": 2,
+            "nome": "insert",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 78,
+                "coluna": 9,
+                "nome": "i",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "If",
+              "linha": 79,
+              "coluna": 3,
+              "condicao": {
+                "no": "Binario",
+                "linha": 79,
+                "coluna": 8,
+                "operador": "<",
+                "esquerda": {
+                  "no": "Identificador",
+                  "linha": 79,
+                  "coluna": 6,
+                  "nome": "i",
+                  "tipo_inferido": "Int"
+                },
+                "direita": {
+                  "no": "Identificador",
+                  "linha": 79,
+                  "coluna": 10,
+                  "nome": "xcar",
+                  "tipo_inferido": "Int"
+                },
+                "tipo_inferido": "Bool"
+              },
+              "entao": {
+                "no": "Dispatch",
+                "linha": 80,
+                "coluna": 14,
+                "alvo": {
+                  "no": "New",
+                  "linha": 80,
+                  "coluna": 5,
+                  "tipo": "Cons",
+                  "tipo_inferido": "Cons"
+                },
+                "metodo": "init2",
+                "argumentos": [
+                  {
+                    "no": "Identificador",
+                    "linha": 80,
+                    "coluna": 21,
+                    "nome": "i",
+                    "tipo_inferido": "Int"
+                  },
+                  {
+                    "no": "Identificador",
+                    "linha": 80,
+                    "coluna": 23,
+                    "nome": "self",
+                    "tipo_inferido": "SELF_TYPE"
+                  }
+                ],
+                "tipo_inferido": "Object"
+              },
+              "senao": {
+                "no": "Dispatch",
+                "linha": 82,
+                "coluna": 14,
+                "alvo": {
+                  "no": "New",
+                  "linha": 82,
+                  "coluna": 5,
+                  "tipo": "Cons",
+                  "tipo_inferido": "Cons"
+                },
+                "metodo": "init",
+                "argumentos": [
+                  {
+                    "no": "Identificador",
+                    "linha": 82,
+                    "coluna": 20,
+                    "nome": "xcar",
+                    "tipo_inferido": "Int"
+                  },
+                  {
+                    "no": "Dispatch",
+                    "linha": 82,
+                    "coluna": 29,
+                    "alvo": {
+                      "no": "Identificador",
+                      "linha": 82,
+                      "coluna": 25,
+                      "nome": "xcdr",
+                      "tipo_inferido": "List"
+                    },
+                    "metodo": "insert",
+                    "argumentos": [
+                      {
+                        "no": "Identificador",
+                        "linha": 82,
+                        "coluna": 37,
+                        "nome": "i",
+                        "tipo_inferido": "Int"
+                      }
+                    ],
+                    "tipo_inferido": "List"
+                  }
+                ],
+                "tipo_inferido": "Cons"
+              },
+              "tipo_inferido": "Object"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 87,
+            "coluna": 2,
+            "nome": "rcons",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 87,
+                "coluna": 8,
+                "nome": "i",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "Dispatch",
+              "linha": 87,
+              "coluna": 36,
+              "alvo": {
+                "no": "New",
+                "linha": 87,
+                "coluna": 27,
+                "tipo": "Cons",
+                "tipo_inferido": "Cons"
+              },
+              "metodo": "init",
+              "argumentos": [
+                {
+                  "no": "Identificador",
+                  "linha": 87,
+                  "coluna": 42,
+                  "nome": "xcar",
+                  "tipo_inferido": "Int"
+                },
+                {
+                  "no": "Dispatch",
+                  "linha": 87,
+                  "coluna": 52,
+                  "alvo": {
+                    "no": "Identificador",
+                    "linha": 87,
+                    "coluna": 48,
+                    "nome": "xcdr",
+                    "tipo_inferido": "List"
+                  },
+                  "metodo": "rcons",
+                  "argumentos": [
+                    {
+                      "no": "Identificador",
+                      "linha": 87,
+                      "coluna": 59,
+                      "nome": "i",
+                      "tipo_inferido": "Int"
+                    }
+                  ],
+                  "tipo_inferido": "List"
+                }
+              ],
+              "tipo_inferido": "Cons"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 89,
+            "coluna": 2,
+            "nome": "print_list",
+            "formais": [],
+            "tipo_retorno": "Object",
+            "corpo": {
+              "no": "Bloco",
+              "linha": 90,
+              "coluna": 3,
+              "expressoes": [
+                {
+                  "no": "ChamadaSimples",
+                  "linha": 91,
+                  "coluna": 4,
+                  "metodo": "out_int",
+                  "argumentos": [
+                    {
+                      "no": "Identificador",
+                      "linha": 91,
+                      "coluna": 12,
+                      "nome": "xcar",
+                      "tipo_inferido": "Int"
+                    }
+                  ],
+                  "tipo_inferido": "SELF_TYPE"
+                },
+                {
+                  "no": "ChamadaSimples",
+                  "linha": 92,
+                  "coluna": 4,
+                  "metodo": "out_string",
+                  "argumentos": [
+                    {
+                      "no": "StringLiteral",
+                      "linha": 92,
+                      "coluna": 15,
+                      "valor": "\n",
+                      "tipo_inferido": "String"
+                    }
+                  ],
+                  "tipo_inferido": "SELF_TYPE"
+                },
+                {
+                  "no": "Dispatch",
+                  "linha": 93,
+                  "coluna": 8,
+                  "alvo": {
+                    "no": "Identificador",
+                    "linha": 93,
+                    "coluna": 4,
+                    "nome": "xcdr",
+                    "tipo_inferido": "List"
+                  },
+                  "metodo": "print_list",
+                  "argumentos": [],
+                  "tipo_inferido": "Object"
+                }
+              ],
+              "tipo_inferido": "Object"
+            }
+          }
+        ]
+      },
+      {
+        "no": "Classe",
+        "linha": 98,
+        "coluna": 1,
+        "nome": "Nil",
+        "pai": "List",
+        "features": [
+          {
+            "no": "Metodo",
+            "linha": 99,
+            "coluna": 2,
+            "nome": "isNil",
+            "formais": [],
+            "tipo_retorno": "Bool",
+            "corpo": {
+              "no": "Booleano",
+              "linha": 99,
+              "coluna": 19,
+              "valor": true,
+              "tipo_inferido": "Bool"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 101,
+            "coluna": 2,
+            "nome": "rev",
+            "formais": [],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "Identificador",
+              "linha": 101,
+              "coluna": 17,
+              "nome": "self",
+              "tipo_inferido": "SELF_TYPE"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 103,
+            "coluna": 2,
+            "nome": "sort",
+            "formais": [],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "ChamadaSimples",
+              "linha": 103,
+              "coluna": 18,
+              "metodo": "isNil",
+              "argumentos": [],
+              "tipo_inferido": "Bool"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 105,
+            "coluna": 2,
+            "nome": "insert",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 105,
+                "coluna": 9,
+                "nome": "i",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "ChamadaSimples",
+              "linha": 105,
+              "coluna": 27,
+              "metodo": "rcons",
+              "argumentos": [
+                {
+                  "no": "Identificador",
+                  "linha": 105,
+                  "coluna": 33,
+                  "nome": "i",
+                  "tipo_inferido": "Int"
+                }
+              ],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 107,
+            "coluna": 2,
+            "nome": "rcons",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 107,
+                "coluna": 8,
+                "nome": "i",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "Dispatch",
+              "linha": 107,
+              "coluna": 36,
+              "alvo": {
+                "no": "New",
+                "linha": 107,
+                "coluna": 27,
+                "tipo": "Cons",
+                "tipo_inferido": "Cons"
+              },
+              "metodo": "init",
+              "argumentos": [
+                {
+                  "no": "Identificador",
+                  "linha": 107,
+                  "coluna": 42,
+                  "nome": "i",
+                  "tipo_inferido": "Int"
+                },
+                {
+                  "no": "Identificador",
+                  "linha": 107,
+                  "coluna": 44,
+                  "nome": "self",
+                  "tipo_inferido": "SELF_TYPE"
+                }
+              ],
+              "tipo_inferido": "Cons"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 109,
+            "coluna": 2,
+            "nome": "print_list",
+            "formais": [],
+            "tipo_retorno": "Object",
+            "corpo": {
+              "no": "Booleano",
+              "linha": 109,
+              "coluna": 26,
+              "valor": true,
+              "tipo_inferido": "Bool"
+            }
+          }
+        ]
+      },
+      {
+        "no": "Classe",
+        "linha": 114,
+        "coluna": 1,
+        "nome": "Main",
+        "pai": "IO",
+        "features": [
+          {
+            "no": "Atributo",
+            "linha": 116,
+            "coluna": 2,
+            "nome": "l",
+            "tipo": "List",
+            "inicializacao": null
+          },
+          {
+            "no": "Metodo",
+            "linha": 119,
+            "coluna": 2,
+            "nome": "iota",
+            "formais": [
+              {
+                "no": "Formal",
+                "linha": 119,
+                "coluna": 7,
+                "nome": "i",
+                "tipo": "Int"
+              }
+            ],
+            "tipo_retorno": "List",
+            "corpo": {
+              "no": "Bloco",
+              "linha": 120,
+              "coluna": 3,
+              "expressoes": [
+                {
+                  "no": "Atribuicao",
+                  "linha": 121,
+                  "coluna": 5,
+                  "nome": "l",
+                  "valor": {
+                    "no": "New",
+                    "linha": 121,
+                    "coluna": 8,
+                    "tipo": "Nil",
+                    "tipo_inferido": "Nil"
+                  },
+                  "tipo_inferido": "Nil"
+                },
+                {
+                  "no": "Let",
+                  "linha": 122,
+                  "coluna": 4,
+                  "declaracoes": [
+                    {
+                      "no": "DeclaracaoLet",
+                      "linha": 122,
+                      "coluna": 8,
+                      "nome": "j",
+                      "tipo": "Int",
+                      "inicializacao": {
+                        "no": "StringLiteral",
+                        "linha": 122,
+                        "coluna": 19,
+                        "valor": "0",
+                        "tipo_inferido": "String"
+                      }
+                    }
+                  ],
+                  "corpo": {
+                    "no": "While",
+                    "linha": 123,
+                    "coluna": 4,
+                    "condicao": {
+                      "no": "Binario",
+                      "linha": 123,
+                      "coluna": 12,
+                      "operador": "<",
+                      "esquerda": {
+                        "no": "Identificador",
+                        "linha": 123,
+                        "coluna": 10,
+                        "nome": "j",
+                        "tipo_inferido": "Int"
+                      },
+                      "direita": {
+                        "no": "Identificador",
+                        "linha": 123,
+                        "coluna": 14,
+                        "nome": "i",
+                        "tipo_inferido": "Int"
+                      },
+                      "tipo_inferido": "Bool"
+                    },
+                    "corpo": {
+                      "no": "Bloco",
+                      "linha": 125,
+                      "coluna": 4,
+                      "expressoes": [
+                        {
+                          "no": "Atribuicao",
+                          "linha": 126,
+                          "coluna": 6,
+                          "nome": "l",
+                          "valor": {
+                            "no": "Dispatch",
+                            "linha": 126,
+                            "coluna": 19,
+                            "alvo": {
+                              "no": "New",
+                              "linha": 126,
+                              "coluna": 10,
+                              "tipo": "Cons",
+                              "tipo_inferido": "Cons"
+                            },
+                            "metodo": "init",
+                            "argumentos": [
+                              {
+                                "no": "Identificador",
+                                "linha": 126,
+                                "coluna": 25,
+                                "nome": "j",
+                                "tipo_inferido": "Int"
+                              },
+                              {
+                                "no": "Identificador",
+                                "linha": 126,
+                                "coluna": 27,
+                                "nome": "l",
+                                "tipo_inferido": "List"
+                              }
+                            ],
+                            "tipo_inferido": "Cons"
+                          },
+                          "tipo_inferido": "Cons"
+                        },
+                        {
+                          "no": "Atribuicao",
+                          "linha": 127,
+                          "coluna": 6,
+                          "nome": "j",
+                          "valor": {
+                            "no": "Binario",
+                            "linha": 127,
+                            "coluna": 11,
+                            "operador": "+",
+                            "esquerda": {
+                              "no": "Identificador",
+                              "linha": 127,
+                              "coluna": 9,
+                              "nome": "j",
+                              "tipo_inferido": "Int"
+                            },
+                            "direita": {
+                              "no": "Inteiro",
+                              "linha": 127,
+                              "coluna": 13,
+                              "valor": 1,
+                              "tipo_inferido": "Int"
+                            },
+                            "tipo_inferido": "Int"
+                          },
+                          "tipo_inferido": "Int"
+                        }
+                      ],
+                      "tipo_inferido": "Int"
+                    },
+                    "tipo_inferido": "Object"
+                  },
+                  "tipo_inferido": "Object"
+                },
+                {
+                  "no": "Identificador",
+                  "linha": 131,
+                  "coluna": 3,
+                  "nome": "l",
+                  "tipo_inferido": "List"
+                }
+              ],
+              "tipo_inferido": "List"
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 135,
+            "coluna": 2,
             "nome": "main",
             "formais": [],
             "tipo_retorno": "Object",
             "corpo": {
               "no": "Bloco",
-              "linha": 21,
-              "coluna": 9,
+              "linha": 136,
+              "coluna": 3,
               "expressoes": [
                 {
+                  "no": "ChamadaSimples",
+                  "linha": 137,
+                  "coluna": 3,
+                  "metodo": "out_string",
+                  "argumentos": [
+                    {
+                      "no": "StringLiteral",
+                      "linha": 137,
+                      "coluna": 14,
+                      "valor": "How many numbers to sort? ",
+                      "tipo_inferido": "String"
+                    }
+                  ],
+                  "tipo_inferido": "SELF_TYPE"
+                },
+                {
                   "no": "Dispatch",
-                  "linha": 22,
-                  "coluna": 14,
+                  "linha": 138,
+                  "coluna": 30,
                   "alvo": {
-                    "no": "Identificador",
-                    "linha": 22,
-                    "coluna": 13,
-                    "nome": "a",
-                    "tipo_inferido": "A"
+                    "no": "Dispatch",
+                    "linha": 138,
+                    "coluna": 23,
+                    "alvo": {
+                      "no": "Dispatch",
+                      "linha": 138,
+                      "coluna": 17,
+                      "alvo": {
+                        "no": "ChamadaSimples",
+                        "linha": 138,
+                        "coluna": 3,
+                        "metodo": "iota",
+                        "argumentos": [
+                          {
+                            "no": "ChamadaSimples",
+                            "linha": 138,
+                            "coluna": 8,
+                            "metodo": "in_int",
+                            "argumentos": [],
+                            "tipo_inferido": "Int"
+                          }
+                        ],
+                        "tipo_inferido": "List"
+                      },
+                      "metodo": "rev",
+                      "argumentos": [],
+                      "tipo_inferido": "List"
+                    },
+                    "metodo": "sort",
+                    "argumentos": [],
+                    "tipo_inferido": "List"
                   },
-                  "metodo": "value",
+                  "metodo": "print_list",
                   "argumentos": [],
-                  "tipo_inferido": "Int"
-                },
-                {
-                  "no": "Atribuicao",
-                  "linha": 23,
-                  "coluna": 15,
-                  "nome": "a",
-                  "valor": {
-                    "no": "New",
-                    "linha": 23,
-                    "coluna": 18,
-                    "tipo": "B",
-                    "tipo_inferido": "B"
-                  },
-                  "tipo_inferido": "B"
-                },
-                {
-                  "no": "Inteiro",
-                  "linha": 24,
-                  "coluna": 13,
-                  "valor": 0,
-                  "tipo_inferido": "Int"
+                  "tipo_inferido": "Object"
                 }
               ],
-              "tipo_inferido": "Int"
+              "tipo_inferido": "Object"
             }
           }
         ]

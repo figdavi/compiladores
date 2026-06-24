@@ -1,0 +1,1647 @@
+{
+  "functions": [
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [],
+          "op": "nop"
+        },
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_isNil",
+      "type": "bool"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "hd_1",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "new_cell_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "new_cell_2",
+            "hd_1",
+            "self_0"
+          ],
+          "dest": "_t1",
+          "funcs": [
+            "Cons_init"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_cons",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [],
+          "op": "nop"
+        },
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_car",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [],
+          "op": "nop"
+        },
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_cdr",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [
+            "self_0"
+          ],
+          "dest": "_t0",
+          "funcs": [
+            "List_cdr"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_rev",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [
+            "self_0"
+          ],
+          "dest": "_t0",
+          "funcs": [
+            "List_cdr"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_sort",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "i_1",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [
+            "self_0"
+          ],
+          "dest": "_t0",
+          "funcs": [
+            "List_cdr"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_insert",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "i_1",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [
+            "self_0"
+          ],
+          "dest": "_t0",
+          "funcs": [
+            "List_cdr"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_rcons",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [],
+          "op": "nop"
+        },
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "List_print_list",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t2",
+          "op": "const",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "args": [
+            "_t2"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_isNil",
+      "type": "bool"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "hd_3",
+          "type": "int"
+        },
+        {
+          "name": "tl_4",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "hd_3"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "tl_4"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "self_0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_init",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "xcar_1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_car",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "xcdr_2"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_cdr",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "xcdr_2"
+          ],
+          "dest": "_t2",
+          "funcs": [
+            "List_rev"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t2",
+            "xcar_1"
+          ],
+          "dest": "_t3",
+          "funcs": [
+            "List_rcons"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t3"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_rev",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "xcdr_2"
+          ],
+          "dest": "_t2",
+          "funcs": [
+            "List_sort"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t2",
+            "xcar_1"
+          ],
+          "dest": "_t3",
+          "funcs": [
+            "List_insert"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t3"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_sort",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "i_3",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "i_3",
+            "xcar_1"
+          ],
+          "dest": "_t2",
+          "funcs": [],
+          "labels": [],
+          "op": "lt",
+          "type": "bool"
+        },
+        {
+          "args": [
+            "_t2"
+          ],
+          "funcs": [],
+          "labels": [
+            "if_then_0",
+            "if_else_1"
+          ],
+          "op": "br"
+        },
+        {
+          "label": "if_then_0"
+        },
+        {
+          "dest": "_t4",
+          "op": "const",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "args": [
+            "_t4",
+            "i_3",
+            "self_0"
+          ],
+          "dest": "_t5",
+          "funcs": [
+            "Cons_init"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t5"
+          ],
+          "dest": "_t3",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [
+            "if_end_2"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "if_else_1"
+        },
+        {
+          "dest": "_t6",
+          "op": "const",
+          "type": "int",
+          "value": 4
+        },
+        {
+          "args": [
+            "xcdr_2",
+            "i_3"
+          ],
+          "dest": "_t7",
+          "funcs": [
+            "List_insert"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t6",
+            "xcar_1",
+            "_t7"
+          ],
+          "dest": "_t8",
+          "funcs": [
+            "Cons_init"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t8"
+          ],
+          "dest": "_t3",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [
+            "if_end_2"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "if_end_2"
+        },
+        {
+          "args": [
+            "_t3"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_insert",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "i_3",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t2",
+          "op": "const",
+          "type": "int",
+          "value": 5
+        },
+        {
+          "args": [
+            "xcdr_2",
+            "i_3"
+          ],
+          "dest": "_t3",
+          "funcs": [
+            "List_rcons"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t2",
+            "xcar_1",
+            "_t3"
+          ],
+          "dest": "_t4",
+          "funcs": [
+            "Cons_init"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t4"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_rcons",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "xcar_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "xcdr_2",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "xcar_1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "print"
+        },
+        {
+          "dest": "_t2",
+          "op": "const",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "args": [
+            "_t2"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "print"
+        },
+        {
+          "args": [
+            "xcdr_2"
+          ],
+          "dest": "_t3",
+          "funcs": [
+            "List_print_list"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t3"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Cons_print_list",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Nil_isNil",
+      "type": "bool"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [
+            "self_0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Nil_rev",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [
+            "self_0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Nil_sort",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "i_1",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "args": [
+            "self_0",
+            "i_1"
+          ],
+          "dest": "_t0",
+          "funcs": [
+            "Nil_rcons"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Nil_insert",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "i_1",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 6
+        },
+        {
+          "args": [
+            "_t0",
+            "i_1",
+            "self_0"
+          ],
+          "dest": "_t1",
+          "funcs": [
+            "Cons_init"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Nil_rcons",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "funcs": [],
+          "labels": [
+            "bool_to_int_true_0",
+            "bool_to_int_false_1"
+          ],
+          "op": "br"
+        },
+        {
+          "label": "bool_to_int_true_0"
+        },
+        {
+          "dest": "_t2",
+          "op": "const",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "args": [
+            "_t2"
+          ],
+          "dest": "_t1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [
+            "bool_to_int_end_2"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "bool_to_int_false_1"
+        },
+        {
+          "dest": "_t3",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t3"
+          ],
+          "dest": "_t1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [
+            "bool_to_int_end_2"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "bool_to_int_end_2"
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Nil_print_list",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        },
+        {
+          "name": "i_2",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "l_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 7
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "dest": "l_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t2",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t2"
+          ],
+          "dest": "j_3",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [
+            "while_cond_0"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "while_cond_0"
+        },
+        {
+          "args": [
+            "j_3",
+            "i_2"
+          ],
+          "dest": "_t3",
+          "funcs": [],
+          "labels": [],
+          "op": "lt",
+          "type": "bool"
+        },
+        {
+          "args": [
+            "_t3"
+          ],
+          "funcs": [],
+          "labels": [
+            "while_body_1",
+            "while_end_2"
+          ],
+          "op": "br"
+        },
+        {
+          "label": "while_body_1"
+        },
+        {
+          "dest": "_t4",
+          "op": "const",
+          "type": "int",
+          "value": 8
+        },
+        {
+          "args": [
+            "_t4",
+            "j_3",
+            "l_1"
+          ],
+          "dest": "_t5",
+          "funcs": [
+            "Cons_init"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t5"
+          ],
+          "dest": "l_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t6",
+          "op": "const",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "args": [
+            "j_3",
+            "_t6"
+          ],
+          "dest": "_t7",
+          "funcs": [],
+          "labels": [],
+          "op": "add",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t7"
+          ],
+          "dest": "j_3",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [
+            "while_cond_0"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "while_end_2"
+        },
+        {
+          "dest": "_t8",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "l_1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Main_iota",
+      "type": "int"
+    },
+    {
+      "args": [
+        {
+          "name": "self_0",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "dest": "_t0",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "_t0"
+          ],
+          "dest": "l_1",
+          "funcs": [],
+          "labels": [],
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "dest": "_t1",
+          "op": "const",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "args": [
+            "_t1"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "print"
+        },
+        {
+          "dest": "_t2",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "self_0",
+            "_t2"
+          ],
+          "dest": "_t3",
+          "funcs": [
+            "Main_iota"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t3"
+          ],
+          "dest": "_t4",
+          "funcs": [
+            "List_rev"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t4"
+          ],
+          "dest": "_t5",
+          "funcs": [
+            "List_sort"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t5"
+          ],
+          "dest": "_t6",
+          "funcs": [
+            "List_print_list"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [
+            "_t6"
+          ],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "Main_main",
+      "type": "int"
+    },
+    {
+      "args": [],
+      "instrs": [
+        {
+          "dest": "__main_obj",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "__main_obj"
+          ],
+          "dest": "__main_result",
+          "funcs": [
+            "Main_main"
+          ],
+          "labels": [],
+          "op": "call",
+          "type": "int"
+        },
+        {
+          "args": [],
+          "funcs": [],
+          "labels": [],
+          "op": "ret"
+        }
+      ],
+      "name": "main",
+      "type": null
+    }
+  ],
+  "imports": []
+}

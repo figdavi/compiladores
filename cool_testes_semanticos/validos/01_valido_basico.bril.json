@@ -1,0 +1,153 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "args": [],
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "self",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "const",
+          "dest": "x",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "const",
+          "dest": "msg",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t0",
+          "type": "int",
+          "args": [
+            "msg"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t1",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "x"
+          ]
+        },
+        {
+          "op": "print",
+          "args": [
+            "_t2"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t3",
+          "type": "int",
+          "args": [
+            "x"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 20
+        },
+        {
+          "op": "lt",
+          "dest": "_t5",
+          "type": "bool",
+          "args": [
+            "_t3",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t5"
+          ],
+          "labels": [
+            "then_0",
+            "else_0"
+          ]
+        },
+        {
+          "label": "then_0"
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "const",
+          "dest": "_t8",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t6",
+          "type": "int",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "endif_0"
+          ]
+        },
+        {
+          "label": "else_0"
+        },
+        {
+          "op": "const",
+          "dest": "_t9",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "const",
+          "dest": "_t10",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t6",
+          "type": "int",
+          "args": [
+            "_t10"
+          ]
+        },
+        {
+          "label": "endif_0"
+        },
+        {
+          "op": "const",
+          "dest": "_t11",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "ret"
+        }
+      ]
+    }
+  ]
+}

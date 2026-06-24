@@ -1,7 +1,7 @@
 {
   "arquivo_codigo": "exemplo.cl",
   "status": "sucesso",
-  "quantidade_tokens": 202,
+  "quantidade_tokens": 90,
   "quantidade_erros_lexicos": 0,
   "erros_lexicos": [],
   "erro_sintatico": null,
@@ -14,498 +14,160 @@
         "no": "Classe",
         "linha": 1,
         "coluna": 1,
-        "nome": "Main",
-        "pai": "IO",
+        "nome": "B",
+        "pai": "A",
         "features": [
           {
             "no": "Metodo",
             "linha": 2,
-            "coluna": 2,
-            "nome": "main",
+            "coluna": 5,
+            "nome": "value",
             "formais": [],
-            "tipo_retorno": "SELF_TYPE",
+            "tipo_retorno": "Int",
             "corpo": {
-              "no": "Let",
+              "no": "Inteiro",
               "linha": 3,
-              "coluna": 3,
-              "declaracoes": [
-                {
-                  "no": "DeclaracaoLet",
-                  "linha": 3,
-                  "coluna": 7,
-                  "nome": "c",
-                  "tipo": "Complex",
-                  "inicializacao": {
-                    "no": "Dispatch",
-                    "linha": 3,
-                    "coluna": 35,
-                    "alvo": {
-                      "no": "New",
-                      "linha": 3,
-                      "coluna": 23,
-                      "tipo": "Complex"
-                    },
-                    "metodo": "init",
-                    "argumentos": [
-                      {
-                        "no": "Inteiro",
-                        "linha": 3,
-                        "coluna": 41,
-                        "valor": 1
-                      },
-                      {
-                        "no": "Inteiro",
-                        "linha": 3,
-                        "coluna": 44,
-                        "valor": 1
-                      }
-                    ]
-                  }
-                }
-              ],
-              "corpo": {
-                "no": "If",
-                "linha": 4,
-                "coluna": 3,
-                "condicao": {
-                  "no": "Binario",
-                  "linha": 4,
-                  "coluna": 32,
-                  "operador": "=",
-                  "esquerda": {
-                    "no": "Dispatch",
-                    "linha": 4,
-                    "coluna": 19,
-                    "alvo": {
-                      "no": "Dispatch",
-                      "linha": 4,
-                      "coluna": 7,
-                      "alvo": {
-                        "no": "Identificador",
-                        "linha": 4,
-                        "coluna": 6,
-                        "nome": "c"
-                      },
-                      "metodo": "reflect_X",
-                      "argumentos": []
-                    },
-                    "metodo": "reflect_Y",
-                    "argumentos": []
-                  },
-                  "direita": {
-                    "no": "Dispatch",
-                    "linha": 4,
-                    "coluna": 35,
-                    "alvo": {
-                      "no": "Identificador",
-                      "linha": 4,
-                      "coluna": 34,
-                      "nome": "c"
-                    },
-                    "metodo": "reflect_0",
-                    "argumentos": []
-                  }
-                },
-                "entao": {
-                  "no": "ChamadaSimples",
-                  "linha": 5,
-                  "coluna": 8,
-                  "metodo": "out_string",
-                  "argumentos": [
-                    {
-                      "no": "StringLiteral",
-                      "linha": 5,
-                      "coluna": 19,
-                      "valor": "=)\n"
-                    }
-                  ]
-                },
-                "senao": {
-                  "no": "ChamadaSimples",
-                  "linha": 6,
-                  "coluna": 8,
-                  "metodo": "out_string",
-                  "argumentos": [
-                    {
-                      "no": "StringLiteral",
-                      "linha": 6,
-                      "coluna": 19,
-                      "valor": "=(\n"
-                    }
-                  ]
-                }
-              }
+              "coluna": 9,
+              "valor": 2
             }
           }
         ]
       },
       {
         "no": "Classe",
-        "linha": 12,
+        "linha": 7,
         "coluna": 1,
-        "nome": "Complex",
-        "pai": "IO",
+        "nome": "A",
+        "pai": null,
+        "features": [
+          {
+            "no": "Metodo",
+            "linha": 8,
+            "coluna": 5,
+            "nome": "value",
+            "formais": [],
+            "tipo_retorno": "Int",
+            "corpo": {
+              "no": "Inteiro",
+              "linha": 9,
+              "coluna": 9,
+              "valor": 1
+            }
+          },
+          {
+            "no": "Metodo",
+            "linha": 12,
+            "coluna": 5,
+            "nome": "same",
+            "formais": [],
+            "tipo_retorno": "SELF_TYPE",
+            "corpo": {
+              "no": "Identificador",
+              "linha": 13,
+              "coluna": 9,
+              "nome": "self"
+            }
+          }
+        ]
+      },
+      {
+        "no": "Classe",
+        "linha": 17,
+        "coluna": 1,
+        "nome": "Main",
+        "pai": null,
         "features": [
           {
             "no": "Atributo",
-            "linha": 13,
-            "coluna": 2,
-            "nome": "x",
-            "tipo": "Int",
-            "inicializacao": null
-          },
-          {
-            "no": "Atributo",
-            "linha": 14,
-            "coluna": 2,
-            "nome": "y",
-            "tipo": "Int",
-            "inicializacao": null
-          },
-          {
-            "no": "Metodo",
-            "linha": 16,
-            "coluna": 2,
-            "nome": "init",
-            "formais": [
-              {
-                "no": "Formal",
-                "linha": 16,
-                "coluna": 7,
-                "nome": "a",
-                "tipo": "Int"
-              },
-              {
-                "no": "Formal",
-                "linha": 16,
-                "coluna": 16,
-                "nome": "b",
-                "tipo": "Int"
-              }
-            ],
-            "tipo_retorno": "Complex",
-            "corpo": {
-              "no": "Bloco",
-              "linha": 17,
-              "coluna": 2,
-              "expressoes": [
-                {
-                  "no": "Binario",
-                  "linha": 18,
-                  "coluna": 5,
-                  "operador": "<",
-                  "esquerda": {
-                    "no": "Identificador",
-                    "linha": 18,
-                    "coluna": 3,
-                    "nome": "x"
-                  },
-                  "direita": {
-                    "no": "Inteiro",
-                    "linha": 18,
-                    "coluna": 7,
-                    "valor": 1
-                  }
-                },
-                {
-                  "no": "Binario",
-                  "linha": 19,
-                  "coluna": 5,
-                  "operador": "=",
-                  "esquerda": {
-                    "no": "Identificador",
-                    "linha": 19,
-                    "coluna": 3,
-                    "nome": "x"
-                  },
-                  "direita": {
-                    "no": "Identificador",
-                    "linha": 19,
-                    "coluna": 7,
-                    "nome": "a"
-                  }
-                },
-                {
-                  "no": "Binario",
-                  "linha": 20,
-                  "coluna": 5,
-                  "operador": "=",
-                  "esquerda": {
-                    "no": "Identificador",
-                    "linha": 20,
-                    "coluna": 3,
-                    "nome": "y"
-                  },
-                  "direita": {
-                    "no": "Identificador",
-                    "linha": 20,
-                    "coluna": 7,
-                    "nome": "b"
-                  }
-                },
-                {
-                  "no": "Identificador",
-                  "linha": 21,
-                  "coluna": 3,
-                  "nome": "self"
-                }
-              ]
+            "linha": 18,
+            "coluna": 5,
+            "nome": "a",
+            "tipo": "A",
+            "inicializacao": {
+              "no": "New",
+              "linha": 18,
+              "coluna": 14,
+              "tipo": "B"
             }
           },
           {
             "no": "Metodo",
-            "linha": 25,
-            "coluna": 2,
-            "nome": "print",
+            "linha": 20,
+            "coluna": 5,
+            "nome": "main",
             "formais": [],
             "tipo_retorno": "Object",
             "corpo": {
-              "no": "If",
-              "linha": 26,
-              "coluna": 2,
-              "condicao": {
-                "no": "Binario",
-                "linha": 26,
-                "coluna": 7,
-                "operador": "=",
-                "esquerda": {
-                  "no": "Identificador",
-                  "linha": 26,
-                  "coluna": 5,
-                  "nome": "y"
-                },
-                "direita": {
-                  "no": "Inteiro",
-                  "linha": 26,
-                  "coluna": 9,
-                  "valor": 0
-                }
-              },
-              "entao": {
-                "no": "ChamadaSimples",
-                "linha": 27,
-                "coluna": 7,
-                "metodo": "out_int",
-                "argumentos": [
-                  {
-                    "no": "Identificador",
-                    "linha": 27,
-                    "coluna": 15,
-                    "nome": "x"
+              "no": "Let",
+              "linha": 21,
+              "coluna": 9,
+              "declaracoes": [
+                {
+                  "no": "DeclaracaoLet",
+                  "linha": 21,
+                  "coluna": 13,
+                  "nome": "a",
+                  "tipo": "Animal",
+                  "inicializacao": {
+                    "no": "New",
+                    "linha": 21,
+                    "coluna": 27,
+                    "tipo": "Dog"
                   }
-                ]
-              },
-              "senao": {
-                "no": "Dispatch",
-                "linha": 28,
-                "coluna": 44,
-                "alvo": {
-                  "no": "Dispatch",
-                  "linha": 28,
-                  "coluna": 33,
-                  "alvo": {
-                    "no": "Dispatch",
-                    "linha": 28,
-                    "coluna": 17,
-                    "alvo": {
-                      "no": "ChamadaSimples",
-                      "linha": 28,
-                      "coluna": 7,
-                      "metodo": "out_int",
-                      "argumentos": [
-                        {
-                          "no": "Identificador",
-                          "linha": 28,
-                          "coluna": 15,
-                          "nome": "x"
-                        }
-                      ]
-                    },
-                    "metodo": "out_string",
-                    "argumentos": [
-                      {
-                        "no": "StringLiteral",
-                        "linha": 28,
-                        "coluna": 29,
-                        "valor": "+"
-                      }
-                    ]
-                  },
-                  "metodo": "out_int",
-                  "argumentos": [
-                    {
-                      "no": "Identificador",
-                      "linha": 28,
-                      "coluna": 42,
-                      "nome": "y"
-                    }
-                  ]
+                }
+              ],
+              "corpo": {
+                "no": "Case",
+                "linha": 22,
+                "coluna": 13,
+                "expressao": {
+                  "no": "Identificador",
+                  "linha": 22,
+                  "coluna": 18,
+                  "nome": "a"
                 },
-                "metodo": "out_string",
-                "argumentos": [
+                "ramos": [
                   {
-                    "no": "StringLiteral",
-                    "linha": 28,
-                    "coluna": 56,
-                    "valor": "I"
+                    "no": "RamoCase",
+                    "linha": 23,
+                    "coluna": 17,
+                    "nome": "d",
+                    "tipo": "Dog",
+                    "expressao": {
+                      "no": "StringLiteral",
+                      "linha": 23,
+                      "coluna": 28,
+                      "valor": "string"
+                    }
+                  },
+                  {
+                    "no": "RamoCase",
+                    "linha": 24,
+                    "coluna": 17,
+                    "nome": "c",
+                    "tipo": "Cat",
+                    "expressao": {
+                      "no": "Inteiro",
+                      "linha": 24,
+                      "coluna": 28,
+                      "valor": 2
+                    }
+                  },
+                  {
+                    "no": "RamoCase",
+                    "linha": 25,
+                    "coluna": 17,
+                    "nome": "o",
+                    "tipo": "Object",
+                    "expressao": {
+                      "no": "Inteiro",
+                      "linha": 25,
+                      "coluna": 31,
+                      "valor": 3
+                    }
                   }
                 ]
               }
-            }
-          },
-          {
-            "no": "Metodo",
-            "linha": 32,
-            "coluna": 2,
-            "nome": "reflect_0",
-            "formais": [],
-            "tipo_retorno": "Complex",
-            "corpo": {
-              "no": "Bloco",
-              "linha": 33,
-              "coluna": 2,
-              "expressoes": [
-                {
-                  "no": "Binario",
-                  "linha": 34,
-                  "coluna": 5,
-                  "operador": "=",
-                  "esquerda": {
-                    "no": "Identificador",
-                    "linha": 34,
-                    "coluna": 3,
-                    "nome": "x"
-                  },
-                  "direita": {
-                    "no": "NegacaoAritmetica",
-                    "linha": 34,
-                    "coluna": 7,
-                    "expressao": {
-                      "no": "Identificador",
-                      "linha": 34,
-                      "coluna": 8,
-                      "nome": "x"
-                    }
-                  }
-                },
-                {
-                  "no": "Binario",
-                  "linha": 35,
-                  "coluna": 5,
-                  "operador": "=",
-                  "esquerda": {
-                    "no": "Identificador",
-                    "linha": 35,
-                    "coluna": 3,
-                    "nome": "y"
-                  },
-                  "direita": {
-                    "no": "NegacaoAritmetica",
-                    "linha": 35,
-                    "coluna": 7,
-                    "expressao": {
-                      "no": "Identificador",
-                      "linha": 35,
-                      "coluna": 8,
-                      "nome": "y"
-                    }
-                  }
-                },
-                {
-                  "no": "Identificador",
-                  "linha": 36,
-                  "coluna": 3,
-                  "nome": "self"
-                }
-              ]
-            }
-          },
-          {
-            "no": "Metodo",
-            "linha": 40,
-            "coluna": 2,
-            "nome": "reflect_X",
-            "formais": [],
-            "tipo_retorno": "Complex",
-            "corpo": {
-              "no": "Bloco",
-              "linha": 41,
-              "coluna": 2,
-              "expressoes": [
-                {
-                  "no": "Binario",
-                  "linha": 42,
-                  "coluna": 5,
-                  "operador": "=",
-                  "esquerda": {
-                    "no": "Identificador",
-                    "linha": 42,
-                    "coluna": 3,
-                    "nome": "y"
-                  },
-                  "direita": {
-                    "no": "NegacaoAritmetica",
-                    "linha": 42,
-                    "coluna": 7,
-                    "expressao": {
-                      "no": "Identificador",
-                      "linha": 42,
-                      "coluna": 8,
-                      "nome": "y"
-                    }
-                  }
-                },
-                {
-                  "no": "Identificador",
-                  "linha": 43,
-                  "coluna": 3,
-                  "nome": "self"
-                }
-              ]
-            }
-          },
-          {
-            "no": "Metodo",
-            "linha": 47,
-            "coluna": 2,
-            "nome": "reflect_Y",
-            "formais": [],
-            "tipo_retorno": "Complex",
-            "corpo": {
-              "no": "Bloco",
-              "linha": 48,
-              "coluna": 2,
-              "expressoes": [
-                {
-                  "no": "Binario",
-                  "linha": 49,
-                  "coluna": 5,
-                  "operador": "=",
-                  "esquerda": {
-                    "no": "Identificador",
-                    "linha": 49,
-                    "coluna": 3,
-                    "nome": "x"
-                  },
-                  "direita": {
-                    "no": "NegacaoAritmetica",
-                    "linha": 49,
-                    "coluna": 7,
-                    "expressao": {
-                      "no": "Identificador",
-                      "linha": 49,
-                      "coluna": 8,
-                      "nome": "x"
-                    }
-                  }
-                },
-                {
-                  "no": "Identificador",
-                  "linha": 50,
-                  "coluna": 3,
-                  "nome": "self"
-                }
-              ]
             }
           }
         ]

@@ -1,0 +1,3448 @@
+{
+  "functions": [
+    {
+      "name": "List_cons",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "hd",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "op": "alloc",
+          "dest": "_t1",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t2",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t1",
+            "_t2"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t3",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t4",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t3"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t5",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t4",
+            "_t5"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t6",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t7",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t6"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t8",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t7",
+            "_t8"
+          ]
+        },
+        {
+          "op": "ptrToInt",
+          "dest": "_t9",
+          "type": "int",
+          "args": [
+            "_t1"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "new_cell",
+          "type": "int",
+          "args": [
+            "_t9"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t10",
+          "type": "int",
+          "args": [
+            "new_cell"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t11",
+          "type": "int",
+          "args": [
+            "hd"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_init"
+          ],
+          "args": [
+            "_t10",
+            "_t11",
+            "self"
+          ],
+          "dest": "_t12",
+          "type": "int"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t12"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_isNil",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "bool",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_init",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "hd",
+          "type": "int"
+        },
+        {
+          "name": "tl",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "id",
+          "dest": "_t0",
+          "type": "int",
+          "args": [
+            "hd"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t1",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t2",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t3",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t2"
+          ]
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t3",
+            "_t0"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t4",
+          "type": "int",
+          "args": [
+            "tl"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t5",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t6",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t7",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t5",
+            "_t6"
+          ]
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t7",
+            "_t4"
+          ]
+        },
+        {
+          "op": "ret",
+          "args": [
+            "self"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_car",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t1",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t2",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0",
+            "_t1"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t3",
+          "type": "int",
+          "args": [
+            "_t2"
+          ]
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_cdr",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t1",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t2",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0",
+            "_t1"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t3",
+          "type": "int",
+          "args": [
+            "_t2"
+          ]
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_rev",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t1",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t2",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0",
+            "_t1"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t3",
+          "type": "int",
+          "args": [
+            "_t2"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_rev"
+          ],
+          "args": [
+            "_t3"
+          ],
+          "dest": "_t4",
+          "type": "int"
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t5",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t6",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t7",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t5",
+            "_t6"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t8",
+          "type": "int",
+          "args": [
+            "_t7"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_rcons"
+          ],
+          "args": [
+            "_t4",
+            "_t8"
+          ],
+          "dest": "_t9",
+          "type": "int"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t9"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_sort",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t1",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t2",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0",
+            "_t1"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t3",
+          "type": "int",
+          "args": [
+            "_t2"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_sort"
+          ],
+          "args": [
+            "_t3"
+          ],
+          "dest": "_t4",
+          "type": "int"
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t5",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t6",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t7",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t5",
+            "_t6"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t8",
+          "type": "int",
+          "args": [
+            "_t7"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_insert"
+          ],
+          "args": [
+            "_t4",
+            "_t8"
+          ],
+          "dest": "_t9",
+          "type": "int"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t9"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_insert",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "id",
+          "dest": "_t0",
+          "type": "int",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t1",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t2",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t3",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t2"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t4",
+          "type": "int",
+          "args": [
+            "_t3"
+          ]
+        },
+        {
+          "op": "lt",
+          "dest": "_t5",
+          "type": "bool",
+          "args": [
+            "_t0",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t5"
+          ],
+          "labels": [
+            "then_0",
+            "else_0"
+          ]
+        },
+        {
+          "label": "then_0"
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "op": "alloc",
+          "dest": "_t8",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t7"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t9",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t8",
+            "_t9"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t10",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t11",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t8",
+            "_t10"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t12",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t11",
+            "_t12"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t13",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t14",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t8",
+            "_t13"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t15",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t14",
+            "_t15"
+          ]
+        },
+        {
+          "op": "ptrToInt",
+          "dest": "_t16",
+          "type": "int",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t17",
+          "type": "int",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_init"
+          ],
+          "args": [
+            "_t16",
+            "_t17",
+            "self"
+          ],
+          "dest": "_t18",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t6",
+          "type": "int",
+          "args": [
+            "_t18"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "endif_0"
+          ]
+        },
+        {
+          "label": "else_0"
+        },
+        {
+          "op": "const",
+          "dest": "_t19",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "op": "alloc",
+          "dest": "_t20",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t19"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t21",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t20",
+            "_t21"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t22",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t23",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t20",
+            "_t22"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t24",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t23",
+            "_t24"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t25",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t26",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t20",
+            "_t25"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t27",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t26",
+            "_t27"
+          ]
+        },
+        {
+          "op": "ptrToInt",
+          "dest": "_t28",
+          "type": "int",
+          "args": [
+            "_t20"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t29",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t30",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t31",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t29",
+            "_t30"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t32",
+          "type": "int",
+          "args": [
+            "_t31"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t33",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t34",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t35",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t33",
+            "_t34"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t36",
+          "type": "int",
+          "args": [
+            "_t35"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t37",
+          "type": "int",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_insert"
+          ],
+          "args": [
+            "_t36",
+            "_t37"
+          ],
+          "dest": "_t38",
+          "type": "int"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_init"
+          ],
+          "args": [
+            "_t28",
+            "_t32",
+            "_t38"
+          ],
+          "dest": "_t39",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t6",
+          "type": "int",
+          "args": [
+            "_t39"
+          ]
+        },
+        {
+          "label": "endif_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t6"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_rcons",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "op": "alloc",
+          "dest": "_t1",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t2",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t1",
+            "_t2"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t3",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t4",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t3"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t5",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t4",
+            "_t5"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t6",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t7",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t6"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t8",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t7",
+            "_t8"
+          ]
+        },
+        {
+          "op": "ptrToInt",
+          "dest": "_t9",
+          "type": "int",
+          "args": [
+            "_t1"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t10",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t11",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t12",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t10",
+            "_t11"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t13",
+          "type": "int",
+          "args": [
+            "_t12"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t14",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t15",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t16",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t14",
+            "_t15"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t17",
+          "type": "int",
+          "args": [
+            "_t16"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t18",
+          "type": "int",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_rcons"
+          ],
+          "args": [
+            "_t17",
+            "_t18"
+          ],
+          "dest": "_t19",
+          "type": "int"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_init"
+          ],
+          "args": [
+            "_t9",
+            "_t13",
+            "_t19"
+          ],
+          "dest": "_t20",
+          "type": "int"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t20"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cons_print_list",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t1",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t2",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0",
+            "_t1"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t3",
+          "type": "int",
+          "args": [
+            "_t2"
+          ]
+        },
+        {
+          "op": "print",
+          "args": [
+            "_t3"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "const",
+          "dest": "_t5",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t6",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t8",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t6",
+            "_t7"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t9",
+          "type": "int",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_print_list"
+          ],
+          "args": [
+            "_t9"
+          ],
+          "dest": "_t10",
+          "type": "int"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t10"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nil_isNil",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "bool",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nil_rev",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "ret",
+          "args": [
+            "self"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nil_sort",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "ret",
+          "args": [
+            "self"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nil_insert",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "id",
+          "dest": "_t0",
+          "type": "int",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Nil_rcons"
+          ],
+          "args": [
+            "self",
+            "_t0"
+          ],
+          "dest": "_t1",
+          "type": "int"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nil_rcons",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "op": "alloc",
+          "dest": "_t1",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t2",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t1",
+            "_t2"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t3",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t4",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t3"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t5",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t4",
+            "_t5"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t6",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t7",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t6"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t8",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t7",
+            "_t8"
+          ]
+        },
+        {
+          "op": "ptrToInt",
+          "dest": "_t9",
+          "type": "int",
+          "args": [
+            "_t1"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t10",
+          "type": "int",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_init"
+          ],
+          "args": [
+            "_t9",
+            "_t10",
+            "self"
+          ],
+          "dest": "_t11",
+          "type": "int"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t11"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nil_print_list",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "op": "const",
+          "dest": "_t1",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Main_iota",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "alloc",
+          "dest": "_t1",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t2",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t1",
+            "_t2"
+          ]
+        },
+        {
+          "op": "ptrToInt",
+          "dest": "_t3",
+          "type": "int",
+          "args": [
+            "_t1"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t4",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t5",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t6",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t4",
+            "_t5"
+          ]
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t6",
+            "_t3"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "j",
+          "type": "int",
+          "args": [
+            "_t7"
+          ]
+        },
+        {
+          "label": "while_entry_0"
+        },
+        {
+          "op": "id",
+          "dest": "_t8",
+          "type": "int",
+          "args": [
+            "j"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t9",
+          "type": "int",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "lt",
+          "dest": "_t10",
+          "type": "bool",
+          "args": [
+            "_t8",
+            "_t9"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t10"
+          ],
+          "labels": [
+            "while_body_0",
+            "while_exit_0"
+          ]
+        },
+        {
+          "label": "while_body_0"
+        },
+        {
+          "op": "const",
+          "dest": "_t11",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "op": "alloc",
+          "dest": "_t12",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t11"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t13",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t12",
+            "_t13"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t14",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t15",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t12",
+            "_t14"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t16",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t15",
+            "_t16"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t17",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t18",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t12",
+            "_t17"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t19",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t18",
+            "_t19"
+          ]
+        },
+        {
+          "op": "ptrToInt",
+          "dest": "_t20",
+          "type": "int",
+          "args": [
+            "_t12"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t21",
+          "type": "int",
+          "args": [
+            "j"
+          ]
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t22",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t23",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t24",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t22",
+            "_t23"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t25",
+          "type": "int",
+          "args": [
+            "_t24"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_init"
+          ],
+          "args": [
+            "_t20",
+            "_t21",
+            "_t25"
+          ],
+          "dest": "_t26",
+          "type": "int"
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t27",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t28",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t29",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t27",
+            "_t28"
+          ]
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t29",
+            "_t26"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "_t30",
+          "type": "int",
+          "args": [
+            "j"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t31",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "add",
+          "dest": "_t32",
+          "type": "int",
+          "args": [
+            "_t30",
+            "_t31"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "j",
+          "type": "int",
+          "args": [
+            "_t32"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "while_entry_0"
+          ]
+        },
+        {
+          "label": "while_exit_0"
+        },
+        {
+          "op": "const",
+          "dest": "_t33",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "intToPtr",
+          "dest": "_t34",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t35",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t36",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t34",
+            "_t35"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t37",
+          "type": "int",
+          "args": [
+            "_t36"
+          ]
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t37"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "args": [],
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "alloc",
+          "dest": "_t1",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t2",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t1",
+            "_t2"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t3",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ptradd",
+          "dest": "_t4",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "_t1",
+            "_t3"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t5",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "store",
+          "args": [
+            "_t4",
+            "_t5"
+          ]
+        },
+        {
+          "op": "ptrToInt",
+          "dest": "_t6",
+          "type": "int",
+          "args": [
+            "_t1"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "self",
+          "type": "int",
+          "args": [
+            "_t6"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "const",
+          "dest": "_t8",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "read",
+          "dest": "_t9",
+          "type": "int"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Main_iota"
+          ],
+          "args": [
+            "self",
+            "_t9"
+          ],
+          "dest": "_t10",
+          "type": "int"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_rev"
+          ],
+          "args": [
+            "_t10"
+          ],
+          "dest": "_t11",
+          "type": "int"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_sort"
+          ],
+          "args": [
+            "_t11"
+          ],
+          "dest": "_t12",
+          "type": "int"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@List_print_list"
+          ],
+          "args": [
+            "_t12"
+          ],
+          "dest": "_t13",
+          "type": "int"
+        },
+        {
+          "op": "ret"
+        }
+      ]
+    },
+    {
+      "name": "List_cdr",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t1",
+          "type": "int",
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "eq",
+          "dest": "_t3",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t3"
+          ],
+          "labels": [
+            "dispatch_Cons_1",
+            "miss_Cons_2"
+          ]
+        },
+        {
+          "label": "dispatch_Cons_1"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_cdr"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t5",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t5"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Cons_2"
+        },
+        {
+          "op": "const",
+          "dest": "_t6",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t6"
+          ]
+        },
+        {
+          "label": "dispatch_done_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List_car",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t1",
+          "type": "int",
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "eq",
+          "dest": "_t3",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t3"
+          ],
+          "labels": [
+            "dispatch_Cons_1",
+            "miss_Cons_2"
+          ]
+        },
+        {
+          "label": "dispatch_Cons_1"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_car"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t5",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t5"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Cons_2"
+        },
+        {
+          "op": "const",
+          "dest": "_t6",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t6"
+          ]
+        },
+        {
+          "label": "dispatch_done_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List_print_list",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t1",
+          "type": "int",
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "eq",
+          "dest": "_t3",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t3"
+          ],
+          "labels": [
+            "dispatch_Cons_1",
+            "miss_Cons_2"
+          ]
+        },
+        {
+          "label": "dispatch_Cons_1"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_print_list"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t5",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t5"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Cons_2"
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "eq",
+          "dest": "_t6",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t7"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t6"
+          ],
+          "labels": [
+            "dispatch_Nil_3",
+            "miss_Nil_4"
+          ]
+        },
+        {
+          "label": "dispatch_Nil_3"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Nil_print_list"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t8",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Nil_4"
+        },
+        {
+          "op": "const",
+          "dest": "_t9",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t9"
+          ]
+        },
+        {
+          "label": "dispatch_done_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List_rcons",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t1",
+          "type": "int",
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "eq",
+          "dest": "_t3",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t3"
+          ],
+          "labels": [
+            "dispatch_Cons_1",
+            "miss_Cons_2"
+          ]
+        },
+        {
+          "label": "dispatch_Cons_1"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_rcons"
+          ],
+          "args": [
+            "self",
+            "i"
+          ],
+          "dest": "_t5",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t5"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Cons_2"
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "eq",
+          "dest": "_t6",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t7"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t6"
+          ],
+          "labels": [
+            "dispatch_Nil_3",
+            "miss_Nil_4"
+          ]
+        },
+        {
+          "label": "dispatch_Nil_3"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Nil_rcons"
+          ],
+          "args": [
+            "self",
+            "i"
+          ],
+          "dest": "_t8",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Nil_4"
+        },
+        {
+          "op": "const",
+          "dest": "_t9",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t9"
+          ]
+        },
+        {
+          "label": "dispatch_done_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List_rev",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t1",
+          "type": "int",
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "eq",
+          "dest": "_t3",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t3"
+          ],
+          "labels": [
+            "dispatch_Cons_1",
+            "miss_Cons_2"
+          ]
+        },
+        {
+          "label": "dispatch_Cons_1"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_rev"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t5",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t5"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Cons_2"
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "eq",
+          "dest": "_t6",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t7"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t6"
+          ],
+          "labels": [
+            "dispatch_Nil_3",
+            "miss_Nil_4"
+          ]
+        },
+        {
+          "label": "dispatch_Nil_3"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Nil_rev"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t8",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Nil_4"
+        },
+        {
+          "op": "const",
+          "dest": "_t9",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t9"
+          ]
+        },
+        {
+          "label": "dispatch_done_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List_sort",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t1",
+          "type": "int",
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "eq",
+          "dest": "_t3",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t3"
+          ],
+          "labels": [
+            "dispatch_Cons_1",
+            "miss_Cons_2"
+          ]
+        },
+        {
+          "label": "dispatch_Cons_1"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_sort"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t5",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t5"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Cons_2"
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "eq",
+          "dest": "_t6",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t7"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t6"
+          ],
+          "labels": [
+            "dispatch_Nil_3",
+            "miss_Nil_4"
+          ]
+        },
+        {
+          "label": "dispatch_Nil_3"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Nil_sort"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t8",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Nil_4"
+        },
+        {
+          "op": "const",
+          "dest": "_t9",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t9"
+          ]
+        },
+        {
+          "label": "dispatch_done_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List_insert",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t1",
+          "type": "int",
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "eq",
+          "dest": "_t3",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t3"
+          ],
+          "labels": [
+            "dispatch_Cons_1",
+            "miss_Cons_2"
+          ]
+        },
+        {
+          "label": "dispatch_Cons_1"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_insert"
+          ],
+          "args": [
+            "self",
+            "i"
+          ],
+          "dest": "_t5",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t5"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Cons_2"
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "eq",
+          "dest": "_t6",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t7"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t6"
+          ],
+          "labels": [
+            "dispatch_Nil_3",
+            "miss_Nil_4"
+          ]
+        },
+        {
+          "label": "dispatch_Nil_3"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Nil_insert"
+          ],
+          "args": [
+            "self",
+            "i"
+          ],
+          "dest": "_t8",
+          "type": "int"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Nil_4"
+        },
+        {
+          "op": "const",
+          "dest": "_t9",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "int",
+          "args": [
+            "_t9"
+          ]
+        },
+        {
+          "label": "dispatch_done_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List_isNil",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "bool",
+      "instrs": [
+        {
+          "op": "intToPtr",
+          "dest": "_t0",
+          "type": {
+            "ptr": "int"
+          },
+          "args": [
+            "self"
+          ]
+        },
+        {
+          "op": "load",
+          "dest": "_t1",
+          "type": "int",
+          "args": [
+            "_t0"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t4",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "eq",
+          "dest": "_t3",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t3"
+          ],
+          "labels": [
+            "dispatch_Cons_1",
+            "miss_Cons_2"
+          ]
+        },
+        {
+          "label": "dispatch_Cons_1"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Cons_isNil"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t5",
+          "type": "bool"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "bool",
+          "args": [
+            "_t5"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Cons_2"
+        },
+        {
+          "op": "const",
+          "dest": "_t7",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "eq",
+          "dest": "_t6",
+          "type": "bool",
+          "args": [
+            "_t1",
+            "_t7"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "_t6"
+          ],
+          "labels": [
+            "dispatch_Nil_3",
+            "miss_Nil_4"
+          ]
+        },
+        {
+          "label": "dispatch_Nil_3"
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@Nil_isNil"
+          ],
+          "args": [
+            "self"
+          ],
+          "dest": "_t8",
+          "type": "bool"
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "bool",
+          "args": [
+            "_t8"
+          ]
+        },
+        {
+          "op": "jmp",
+          "labels": [
+            "dispatch_done_0"
+          ]
+        },
+        {
+          "label": "miss_Nil_4"
+        },
+        {
+          "op": "const",
+          "dest": "_t9",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "op": "id",
+          "dest": "_t2",
+          "type": "bool",
+          "args": [
+            "_t9"
+          ]
+        },
+        {
+          "label": "dispatch_done_0"
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t2"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "functions": [
+    {
+      "name": "A_value",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A_same",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "ret",
+          "args": [
+            "self"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B_value",
+      "args": [
+        {
+          "name": "self",
+          "type": "int"
+        }
+      ],
+      "type": "int",
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "_t0",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "op": "ret",
+          "args": [
+            "_t0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "args": [],
+      "instrs": [
+        {
+          "op": "const",
+          "dest": "self",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "const",
+          "dest": "a",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "_t0",
+          "type": "int",
+          "args": [
+            "a"
+          ]
+        },
+        {
+          "op": "call",
+          "funcs": [
+            "@A_value"
+          ],
+          "args": [
+            "_t0"
+          ],
+          "dest": "_t1",
+          "type": "int"
+        },
+        {
+          "op": "const",
+          "dest": "_t2",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "id",
+          "dest": "a",
+          "type": "int",
+          "args": [
+            "_t2"
+          ]
+        },
+        {
+          "op": "const",
+          "dest": "_t3",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "op": "ret"
+        }
+      ]
+    }
+  ]
+}
