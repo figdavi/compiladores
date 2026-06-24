@@ -203,14 +203,6 @@ O caminho de saída agora é derivado do `.cl` de entrada: `arquivo.cl` → `arq
 
 ---
 
-### Prompt 2
-
-> "append new context to readme.md (including all prompts i asked and what you did)"
-
-**O que foi feito:** esta seção foi adicionada ao `README.md` documentando os prompts desta sessão e as mudanças correspondentes.
-
----
-
 ## Sessão de correção de `exemplo.cl`
 
 ### Prompt 1
@@ -241,14 +233,6 @@ O caminho de saída agora é derivado do `.cl` de entrada: `arquivo.cl` → `arq
 2. **`Nil.sort()`** — corrigido de `isNil()` (tipo `Bool`) para `self` (tipo `SELF_TYPE`, conforme `List`). Uma lista vazia já está ordenada, portanto retornar `self` é semanticamente correto.
 
 3. **`let j : Int <- "0"`** — corrigido para `let j : Int <- 0` (literal inteiro).
-
----
-
-### Prompt 2
-
-> "add new context and prompts in this session appending to readme.md"
-
-**O que foi feito:** esta seção foi adicionada ao `README.md` documentando os prompts desta sessão e as mudanças correspondentes.
 
 ---
 
@@ -308,14 +292,6 @@ const matches = funcs.filter(f => f.name === name);
 ```
 
 **Resultado:** `echo 5 | brili exemplo.bril.json` executa sem erros. O programa não imprime saída porque `List_print_list` ainda é uma implementação stub (o dispatch virtual Cool → Cons/Nil não está implementado no codegen), mas o interpretador roda até o fim sem crashes.
-
----
-
-### Prompt 2
-
-> "append context and instructions to readme.md"
-
-**O que foi feito:** esta seção foi adicionada ao `README.md` documentando os três bugs encontrados no `brili.ts`, suas causas e os fixes aplicados.
 
 ---
 
@@ -444,8 +420,140 @@ O pipeline completo `iota → rev → sort → print_list` funciona corretamente
 
 ---
 
+## Sessão de correção do opcode `read`
+
+### Problema
+
+> `brili < exemplo.bril.json` retornava `error: unknown opcode read`
+
+**Causa:** o opcode `read` emitido por `emit_builtin` para `in_int()` não existe no conjunto de opcodes do interpretador `brili`. O tipo `bril.OpCode` em `bril-ts/bril.ts` é exaustivo — qualquer opcode ausente é rejeitado pela tabela `argCounts` em `evalInstr` antes de chegar ao `switch`, lançando `"unknown opcode <op>"`.
+
+Além disso, ao invocar `brili < exemplo.bril.json`, o shell consome todo o stdin com o JSON do programa, de modo que quando a instrução `read` é executada não há mais entrada disponível.
+
+**Fixes aplicados:**
+
+**1. `bril/bril-ts/bril.ts` — adicionar `"read"` ao tipo `ValueOperation`:**
+
+```typescript
+// antes
+      "get" | "set" | "undef";
+
+// depois
+      "get" | "set" | "undef" |
+      "read";
+```
+
+**2. `bril/brili.ts` — registrar `read` em `argCounts`:**
+
+```typescript
+read: 0,  // produz dest, sem argumentos de entrada
+```
+
+**3. `bril/brili.ts` — implementar `case "read"` no switch:**
+
+Lê uma linha do stdin de forma síncrona (byte a byte via `Deno.stdin.readSync`) e converte para o tipo declarado na instrução (`int`, `float`, `bool` ou string):
+
+```typescript
+case "read": {
+  const buf = new Uint8Array(1);
+  let line = "";
+  while (true) {
+    const n = Deno.stdin.readSync(buf);
+    if (n === null || n === 0) break;
+    const ch = String.fromCharCode(buf[0]);
+    if (ch === "\n") break;
+    line += ch;
+  }
+  line = line.trim();
+  const dest = instr.dest as bril.Ident;
+  const typ  = instr.type as bril.Type;
+  // conversão de tipo e atribuição a state.env
+}
+```
+
+**4. `bril/brili.ts` — suporte a argumento de arquivo para o programa:**
+
+`evalProg` foi refatorado para receber `mainArgs: string[]` como parâmetro. `main()` foi modificado para aceitar o programa como argumento posicional: se o primeiro argumento terminar em `.json`, o programa é lido do arquivo com `Deno.readTextFile` e o stdin permanece livre para a instrução `read`. Caso contrário, mantém o comportamento anterior (leitura de stdin).
+
+```typescript
+if (cliArgs.length > 0 && cliArgs[0].endsWith(".json")) {
+  progText = await Deno.readTextFile(cliArgs.shift()!);
+} else {
+  progText = await readStdin();
+}
+```
+
+**5. Permissão `--allow-read` no wrapper Deno:**
+
+`Deno.readTextFile` requer `--allow-read`. O wrapper gerado por `deno install` em `~/.deno/bin/brili` não incluía essa flag. O fix é reinstalar:
+
+```sh
+deno install --allow-read --allow-write -f -n brili /home/figdavi/Desktop/compiladores/bril/brili.ts
+```
+
+**Invocação correta após os fixes:**
+
+```sh
+echo 5 | brili exemplo.bril.json
+```
+
+---
+
+## Sessão de entendimento do warning de memória e invocação correta
+
+### Prompt 1
+
+> `brili < exemplo.bril.json` — `warning: Some memory locations have not been freed by end of execution.`
+
+**Explicação:** o warning é esperado e inerente ao design. O codegen emite `alloc` para cada `new T` mas nunca emite `free` — porque Cool depende de garbage collection, que não foi implementado. Os objetos que ficam na heap ao final:
+
+- O objeto `Main` alocado em `main`
+- Cada nó `Cons` criado durante `iota`, `rev`, `sort`, `insert`, `rcons`
+- O objeto `Nil` inicial criado em `Main_iota`
+
+O programa funciona corretamente; o brili apenas não tem GC para recuperar a memória automaticamente. Para um projeto de disciplina de compiladores, o warning é aceitável.
+
+---
+
+### Prompt 2
+
+> "how does the compiler between python and c works in this stance? (garbage collector x free)"
+
+**Resposta resumida:**
+
+CPython não compila Python para C eliminando o GC — o runtime CPython *é* escrito em C e implementa seu próprio gerenciamento de memória sobre `malloc`/`free`. Todo objeto Python é uma struct C com um campo de contagem de referências (`ob_refcnt`). O compilador de bytecode insere chamadas `Py_INCREF`/`Py_DECREF` implicitamente; quando `ob_refcnt` chega a 0, CPython chama `free()` internamente. Há ainda um coletor de ciclos (`gcmodule.c`) para casos como `a.x = a`.
+
+| | Python → C (CPython) | Cool → Bril (este projeto) |
+|---|---|---|
+| Alocação | `PyObject_Malloc` (wrapper de `malloc`) | `alloc` |
+| Liberação | `Py_DECREF` → `free` ao chegar em 0 | ausente |
+| Estratégia de GC | Contagem de referências + coletor de ciclos | nenhuma |
+| Efeito | Objetos liberados imediatamente | Objetos vazam → warning do brili |
+
+Compiladores que traduzem linguagens com GC para C geralmente adotam uma de três abordagens:
+1. **Carregar um runtime de GC**: o C gerado chama uma biblioteca de GC (ex.: Boehm GC) usando `GC_malloc` em vez de `malloc`.
+2. **Emitir contagem de referências inline**: o compilador insere incremento/decremento no C gerado, com destrutor que chama `free` ao chegar em 0 (estratégia do Cython).
+3. **Alocação em arena**: aloca tudo em um bloco grande e libera o bloco inteiro ao fim — rápido, mas tecnicamente ainda "vaza" durante a execução.
+
+---
+
 ### Prompt 3
 
-> "append the session context to readme.md"
+> "if it was just a warning why didn't anything print from execution?"
 
-**O que foi feito:** esta seção foi adicionada ao `README.md` documentando os prompts desta sessão e todas as mudanças correspondentes.
+**Causa:** o programa rodou com entrada `0`, produzindo uma lista vazia que não imprime nada.
+
+Ao usar `brili < exemplo.bril.json`, o shell redireciona o JSON para stdin. O brili consome todo o stdin para parsear o programa. Quando a instrução `read` (de `in_int()`) executa, o stdin está em EOF — o brili retorna `0`. Com `i = 0`, `iota(0)` sai imediatamente do while loop (`0 < 0` é falso), retornando uma lista `Nil` vazia. `rev()`, `sort()` e `print_list()` em `Nil` retornam imediatamente sem imprimir nada.
+
+**Solução:** passar o JSON como argumento de arquivo (mantendo stdin livre para `read`) e fornecer a entrada via pipe:
+
+```sh
+echo "5" | brili exemplo.bril.json
+# saída:
+# 0
+# 1
+# 2
+# 3
+# 4
+# warning: Some memory locations have not been freed by end of execution.
+```
