@@ -1,4 +1,4 @@
-# Compilador COOL → Bril
+# Compilador COOL para Bril
 
 Compilador para a linguagem [COOL](https://en.wikipedia.org/wiki/Cool_(programming_language)) escrito em Python, com backend de geração de código para [Bril](https://capra.cs.cornell.edu/bril/).
 
