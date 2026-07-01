@@ -12,6 +12,7 @@ from parser_cool import ParserCool, ErroSintatico
 # Estruturas semânticas
 # =========================
 
+
 @dataclass
 class ErroSemantico:
     mensagem: str
@@ -80,6 +81,7 @@ class Escopo:
 # =========================
 # Analisador semântico
 # =========================
+
 
 class SemanticAnalyzer:
     PAIS_BASICOS = {
@@ -241,7 +243,7 @@ class SemanticAnalyzer:
 
             while atual in self.classes:
                 if atual in posicao:
-                    ciclo = caminho[posicao[atual]:] + [atual]
+                    ciclo = caminho[posicao[atual] :] + [atual]
                     chave = tuple(ciclo)
 
                     if chave not in ciclos_emitidos:
@@ -493,7 +495,9 @@ class SemanticAnalyzer:
         if feature.get("inicializacao") is None:
             return
 
-        tipo_expr = self.inferir_tipo_expr(feature["inicializacao"], classe.nome, escopo)
+        tipo_expr = self.inferir_tipo_expr(
+            feature["inicializacao"], classe.nome, escopo
+        )
         tipo_decl = feature["tipo"]
 
         if not self.conforma(tipo_expr, tipo_decl, classe.nome):
@@ -660,7 +664,9 @@ class SemanticAnalyzer:
                 )
             return self.anotar_tipo(expr, "Bool")
 
-        self.erro(f"Operador binário não reconhecido: '{op}'", expr["linha"], expr["coluna"])
+        self.erro(
+            f"Operador binário não reconhecido: '{op}'", expr["linha"], expr["coluna"]
+        )
         return self.anotar_tipo(expr, "Object")
 
     def inferir_if(self, expr: dict, classe_atual: str, escopo: Escopo):
@@ -694,7 +700,9 @@ class SemanticAnalyzer:
                 )
 
             if decl.get("inicializacao") is not None:
-                tipo_init = self.inferir_tipo_expr(decl["inicializacao"], classe_atual, escopo)
+                tipo_init = self.inferir_tipo_expr(
+                    decl["inicializacao"], classe_atual, escopo
+                )
 
                 if not self.conforma(tipo_init, tipo_decl, classe_atual):
                     self.erro(
@@ -770,7 +778,9 @@ class SemanticAnalyzer:
 
         self.checar_argumentos(expr, metodo, tipos_args, classe_atual)
 
-        retorno = tipo_alvo if metodo.tipo_retorno == "SELF_TYPE" else metodo.tipo_retorno
+        retorno = (
+            tipo_alvo if metodo.tipo_retorno == "SELF_TYPE" else metodo.tipo_retorno
+        )
         return self.anotar_tipo(expr, retorno)
 
     def inferir_dispatch_estatico(self, expr: dict, classe_atual: str, escopo: Escopo):
@@ -810,7 +820,9 @@ class SemanticAnalyzer:
 
         self.checar_argumentos(expr, metodo, tipos_args, classe_atual)
 
-        retorno = tipo_alvo if metodo.tipo_retorno == "SELF_TYPE" else metodo.tipo_retorno
+        retorno = (
+            tipo_alvo if metodo.tipo_retorno == "SELF_TYPE" else metodo.tipo_retorno
+        )
         return self.anotar_tipo(expr, retorno)
 
     def inferir_chamada_simples(self, expr: dict, classe_atual: str, escopo: Escopo):
@@ -831,10 +843,14 @@ class SemanticAnalyzer:
 
         self.checar_argumentos(expr, metodo, tipos_args, classe_atual)
 
-        retorno = "SELF_TYPE" if metodo.tipo_retorno == "SELF_TYPE" else metodo.tipo_retorno
+        retorno = (
+            "SELF_TYPE" if metodo.tipo_retorno == "SELF_TYPE" else metodo.tipo_retorno
+        )
         return self.anotar_tipo(expr, retorno)
 
-    def checar_argumentos(self, expr: dict, metodo: MetodoInfo, tipos_args: List[str], classe_atual: str):
+    def checar_argumentos(
+        self, expr: dict, metodo: MetodoInfo, tipos_args: List[str], classe_atual: str
+    ):
         if len(tipos_args) != len(metodo.formais):
             self.erro(
                 f"Chamada do método '{metodo.nome}' espera {len(metodo.formais)} argumento(s), "
@@ -885,9 +901,12 @@ class SemanticAnalyzer:
 # Execução completa
 # =========================
 
+
 def salvar_saida(caminho_codigo, saida):
     caminho_saida = Path(caminho_codigo).with_suffix(".sem.json")
-    caminho_saida.write_text(json.dumps(saida, ensure_ascii=False, indent=2), encoding="utf-8")
+    caminho_saida.write_text(
+        json.dumps(saida, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     return caminho_saida
 
 
@@ -931,7 +950,9 @@ def main():
             analisador = SemanticAnalyzer(ast)
             resultado = analisador.analisar()
 
-            saida["quantidade_erros_semanticos"] = resultado["quantidade_erros_semanticos"]
+            saida["quantidade_erros_semanticos"] = resultado[
+                "quantidade_erros_semanticos"
+            ]
             saida["erros_semanticos"] = resultado["erros_semanticos"]
             saida["tabela_classes"] = resultado["tabela_classes"]
 

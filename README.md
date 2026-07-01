@@ -557,3 +557,211 @@ echo "5" | brili exemplo.bril.json
 # 4
 # warning: Some memory locations have not been freed by end of execution.
 ```
+
+---
+
+## Sessão `codegen_bril_v3_3.py` — `ptr<any>`, extensão `dynamic` e `read`
+
+Esta sessão investigou o gerador alternativo `codegen_bril_v3_3.py` (representação de objetos com `ptr<any>` e formato **texto** `.bril`), por que ele não rodava, e como portar a lógica de entrada (`read`) do `codegen_cool.py` para ele. Abaixo, cada prompt e a decisão tomada.
+
+### Prompt 1 — "is this correct?" (`bril2json < exemplo.bril | brili`)
+
+**Diagnóstico:** o pipeline falhava silenciosamente. `bril2json` **rejeitava** `exemplo.bril` com `error: Unknown type` e saía; o `brili` então tentava `JSON.parse` no texto de erro e quebrava com `Unexpected token`.
+
+**Causa raiz:** `codegen_bril_v3_3.py` emite `ptr<any>` em todos os objetos. O Bril não tem tipo `any` por padrão — ponteiros precisam de tipo concreto (`ptr<int>`). Confirmado empiricamente: `ptr<int>` é aceito, `ptr<any>` dá `Unknown type`.
+
+Também foram apontados dois problemas secundários: `@Main_main` fixava `iota(0)` (substituição de `in_int()` por `const 0`) e `out_string` virava `nop`.
+
+### Prompt 2 — "solve the problems"
+
+**Investigação:** o `brili` (TS) **suporta** `any` (`typeCheck`/`typeCmp` tratam `"any"`), mas o tipo `any` no `bril-rs` está atrás da feature de compilação **`dynamic`** (`program.rs:720`), e o `bril2json` instalado foi compilado sem ela. Confirmado também que o `store` do `brili` faz type-check do tipo do elemento — logo um bloco `ptr<int>` **não** pode guardar um ponteiro (`error: store argument 1 must be a int`). Como cada objeto Cool empacota tag/car (ints) e cdr (ponteiro) numa única `alloc`, e uma alocação tem um único tipo de elemento, o design **exige** `any`.
+
+**Decisão:** recompilar o `bril2json` com a feature `dynamic` em vez de redesenhar o codegen. Editado `bril-rs/bril2json/Cargo.toml` adicionando `"dynamic"` à lista de features de `bril-rs`, e reinstalado via `cargo install --path . --force`.
+
+**Resultado:** `bril2json < exemplo.bril | brili` passou a parsear e rodar (exit 0). Demonstrado com uma cópia usando `iota(5)` → imprime `0 1 2 3 4`. Sem `iota(0)`, a lista é vazia e nada imprime (esperado).
+
+### Prompt 3 — "why doesnt in_int() prompt user input in brili?"
+
+**Resposta — três camadas:**
+1. O codegen substitui `in_int()` por `const 0`, então não há instrução de entrada nenhuma.
+2. Bril padrão não tem entrada interativa — entrada vem como argumentos de `@main` na linha de comando.
+3. Este fork do `brili` tem a op não-padrão `read` (lê uma linha de stdin), **mas** no pipe `bril2json < ... | brili` o stdin carrega o **programa**, então `read` recebe EOF → 0.
+
+**Demonstração:** `echo "7" | brili rd.json` (programa via arquivo) imprime `7`; `bril2json < rd.bril | brili` imprime `0` (stdin consumido pelo JSON).
+
+### Prompt 4 — "in_int() emits = read instead of const 0? what will this enable?"
+
+**Resposta:** habilita (1) entrada real → saída real (lista construída a partir de N lido); (2) fidelidade à semântica Cool de `in_int()`; (3) testes orientados a dados sem recompilar. **Ressalvas:** não há prompt interativo no pipe (precisa rodar `brili arquivo.json`); `read` é op não-padrão; `out_string` continua descartado.
+
+### Prompt 5 — "check codegen_cool.py, does it enable reading from stdin?"
+
+**Resposta:** Sim. `codegen_cool.py` (a) emite `read` para `in_int()` (linhas 137-140), (b) emite Bril **JSON** direto (sem pipe `bril2json`), então `brili exemplo.bril.json` mantém stdin livre para `read`, e (c) usa **handles inteiros** via `ptrToInt`/`intToPtr` (todo slot é `int`), evitando `ptr<any>` e a feature `dynamic`.
+
+**Verificado:** `echo "5" | brili exemplo.bril.json` → `0 1 2 3 4`; `echo "3"` → `0 1 2`; sem input → nada (EOF → 0).
+
+### Prompt 6 — "ptr<any> vs ptrToInt/intToPtr: qual é melhor e por quê?"
+
+**Fato decisivo (verificado):** `bril2json` valida nomes de **tipo** mas deixa passar nomes de **op** sem checagem. Logo `ptr<any>` falha (tipo `any` atrás de `dynamic`), enquanto `ptrToInt`/`intToPtr`/`read` (ops) passam usando só `int`/`ptr<int>`.
+
+**Decisão/veredito:**
+- **Handles inteiros vencem para este trabalho** — rodam em toolchain padrão (sem `dynamic`), entrada via stdin funciona, e a limitação de offset-0 do `intToPtr` é inócua porque todo objeto é referenciado pela base.
+- **`ptr<any>` é mais fiel em tipos** (ponteiro é ponteiro, sem conflar handle/inteiro, sem invariante de offset-0), mas depende de recompilar o `bril2json`.
+
+| Critério | Vencedor |
+|---|---|
+| Roda em toolchain padrão | handles inteiros |
+| Entrada via stdin | handles inteiros |
+| Fidelidade de tipos / heap | `ptr<any>` |
+| Sem invariantes ocultas | `ptr<any>` |
+
+### Prompt 7 — "diff codegen_bril_v3_3.py vs codegen_cool.py"
+
+São reescritas quase totais (um `diff` linha-a-linha seria ruído). Comparação relevante:
+
+| Aspecto | `codegen_bril_v3_3.py` | `codegen_cool.py` |
+|---|---|---|
+| Saída | Bril **texto** `.bril` | Bril **JSON** `.bril.json` |
+| Ponteiro de objeto | `ptr<any>` (precisa `dynamic`) | handle `int` via `ptrToInt`/`intToPtr` |
+| `in_int()` | `const 0` (ou arg de `@main` com `--main-input`) | `read` (stdin real) |
+| `out_string` | `nop` (ou id inteiro com `--debug-string-ids`) | `nop` |
+| Linhas | ~1506 | ~656 |
+| CLI | `argparse` com 4 flags | só arg posicional |
+
+**Cobertura:** `codegen_bril_v3_3.py` é mais completo (coerções de tipo, `case` por dispatch em runtime, escopo aninhado, `isvoid`/igualdade reais, builtins de String, planejamento de tipo). `codegen_cool.py` é mais enxuto e portável, porém semanticamente mais frouxo (`case` em tempo de compilação, sem coerções, sem escopo aninhado, strings/builtins stub).
+
+**Trade-off:** v3_3 = correção/cobertura mas dependente de toolchain (`ptr<any>`); codegen_cool = portabilidade + I/O funcionando mas semântica mais fina. Nenhum domina o outro.
+
+### Prompt 8 — "bring read logic to codegen_bril v3"
+
+**Decisão/implementação:** no handler `in_int` de `gerar_chamada_basica` (`codegen_bril_v3_3.py`), passou a emitir `read` como padrão, mantendo o caminho `--main-input` (argumento de `@main`) como override:
+
+```python
+if nome == "in_int":
+    # Com --main-input, usa o inteiro recebido como argumento de @main.
+    entrada = self.escopo.buscar("__cool_input0")
+    if entrada is not None:
+        return CodeValue(entrada.nome_bril, entrada.tipo_bril, entrada.tipo_cool)
+    # Caso contrário, lê uma linha de stdin em tempo de execução (op `read`).
+    dest = self.novo_temp()
+    self.emit(f"{dest}: int = read;")
+    return CodeValue(dest, "int", "Int")
+```
+
+O docstring da classe foi atualizado para registrar que `in_int()` lê de stdin via `read` (exige rodar `brili arquivo.json`, não o pipe). **Verificado** com `out_int(in_int() + in_int())`: `printf '10\n32\n' | brili in_test.json` → `42` (dois `read` emitidos).
+
+**Observação importante:** a edição vive em `codegen_bril_v3_3.py`; a cópia `codegen_bril_v3_3 copy.py` **não** tem a alteração. Rodar a cópia gera `in_int()` como `const 0` (ignora stdin), motivo pelo qual `echo "5" | brili exemplo.bril.json` não imprimia nada (lista vazia de `iota(0)`).
+
+### Prompt 9 — "is ptr<any> easier to explain than ptrToInt?"
+
+**Resposta:** Sim, conceitualmente `ptr<any>` é mais fácil de explicar — o modelo é a frase padrão "objeto = registro no heap (slot 0 = tag, slots 1..n = atributos); referência = ponteiro", com **uma** nota de rodapé (por que `any`: o registro mistura tipos numa alocação, e o `store` do Bril checa o tipo do elemento, então o elemento precisa ser `any`/extensão `dynamic`). Já o esquema de handles inteiros exige introduzir **três** ideias: boxing de referências como ints, o round-trip `intToPtr`/`ptradd`/`ptrToInt`, e a invariante de offset-0.
+
+| | Modelo mental | Ressalva a explicar |
+|---|---|---|
+| `ptr<any>` | 1 ideia (objeto=registro, ref=ponteiro) | precisa da extensão `dynamic` |
+| handle int | 3 ideias (boxing, round-trip, offset-0) | nenhuma (tipos padrão) |
+
+**Conclusão:** mais fácil de *explicar* → `ptr<any>`; mais fácil de *rodar em toolchain padrão* → handles inteiros.
+
+---
+
+## Sessão sobre impressão de strings e `--debug-string-ids`
+
+Esta sessão investigou se é possível imprimir strings de verdade no caminho `.cl → Bril` e o que exatamente a flag `--debug-string-ids` faz.
+
+### Prompt 1 — "is it possible to make .cl -> bril print string?"
+
+**Resposta:** Não como texto real em Bril padrão. O núcleo do Bril só tem `int` e `bool` (e `float`, `ptr`, `char` como extensões) — **não existe tipo string**. A op `print` só sabe renderizar valores escalares. Por isso o `codegen_bril_v3_3.py` representa cada literal de string como um **ID inteiro simbólico** (atribuído sequencialmente em `string_const`, começando em 1) e faz `out_string` virar `nop`.
+
+**Alternativa investigada — extensão `char`:** o repo `bril/` clonado suporta `char` (`bril/docs/lang/char.md`; `brilirs` renderiza via `Display for Value`). Seria possível emitir cada caractere como um `char` const e imprimi-lo, mas a op `print` dos interpretadores de referência tem duas limitações fatais (`brilirs/src/interp.rs:630`):
+
+- **Um argumento por `print`** (`PrintOne`) → adiciona `\n` no fim de cada chamada → um caractere por linha.
+- **Vários argumentos em um `print`** (`PrintMultiple`) → separados por espaço (`H e l l o`), depois `\n`.
+
+Nenhum dos modos reproduz `"Hello, world.\n"` fielmente — não há modo de `print` que concatene caracteres sem separador e sem `\n` forçado.
+
+| Abordagem | Resultado |
+|---|---|
+| Atual (ID inteiro simbólico) | imprime um número |
+| Extensão `char`, 1 print/char | texto, mas um caractere por linha |
+| Extensão `char`, tudo em 1 print | texto, mas separado por espaços |
+| Saída de string real | **impossível** em Bril core / `brili` / `brilirs` |
+
+**Decisão/veredito:** para um backend Bril de disciplina, a abordagem de ID inteiro (`--debug-string-ids`) é a escolha honesta e padrão; impressão fiel de texto não é alcançável.
+
+### Prompt 2 — "what does --debug-string-ids do?"
+
+**Resposta:** é uma flag de CLI que muda o comportamento de `out_string`, transformando-o de um no-op silencioso em algo que imprime o **ID inteiro simbólico** da string.
+
+- **Representação:** cada literal distinto recebe um ID sequencial na primeira vez que aparece (`string_const`, linha 738): `"Hello"` → `1`, `"World"` → `2`, etc. Um literal compila para `_tN: int = const <id>;` — não há texto em lugar nenhum.
+- **Toggle em `out_string`** (linha 1285): por padrão (flag desligada) emite `nop;` e nada é impresso; com `--debug-string-ids` coage o argumento para `int` e emite `print <id>;` — imprime o número do ID, não o texto.
+- **Por que existe:** é um **auxílio de depuração**. Como o Bril não imprime texto, a flag permite verificar que o programa chegou na chamada `out_string` certa e selecionou a constante de string correta (vê-se *qual* string pelo número do ID), mesmo sem ver os caracteres reais. Ex.: `out_string("A"); out_string("B"); out_string("A")` imprime `1`, `2`, `1`.
+
+---
+
+## Sessão de comparação e correção de geradores Bril (V3.3, V4, V4.1)
+
+### Prompt 1
+
+> "Possível bug de geração de código no `codegen_bril_v4.py`: variáveis atribuídas dentro do corpo de um `while` podem não estar visíveis para a condição na iteração seguinte."
+
+(Observação sobre escopo de variáveis em `let`/atribuição dentro de while — motivou investigação.)
+
+---
+
+### Prompt 2
+
+> "Corrija a entrada stdin do `codegen_bril_v4.py`. Use a lógica de `read` do `codegen_bril_v3_3.py` ou do `codegen_cool.py`, o que for mais limpo."
+
+**O que foi feito:** a abordagem anterior (`--main-input`) passava um único inteiro `__cool_input0` como argumento de `@main`, o que quebrava para múltiplas chamadas a `in_int()`. Foi substituída pela emissão direta de `{"op": "read", "dest": <temp>, "type": "int"}` — o mesmo padrão limpo do `codegen_cool.py`. Toda a infraestrutura `usar_main_input` foi removida do V4.
+
+---
+
+### Prompt 3
+
+> "Por que `read` é considerado 'inseguro' para Bril? E por que o `codegen_bril_v4_1.py` usa `--main-input` em vez de `read`?"
+
+**Resposta resumida:** `read` não é inseguro no sentido de segurança — é simplesmente não-padrão: não faz parte da especificação core do Bril. O V4.1 adota `--main-input` para conformidade com a spec: conta as chamadas `in_int()` em `Main.main` via `contar_chamadas_io()` e gera N parâmetros em `@main`, que recebem os valores via linha de comando (`brili prog.bril.json val1 val2 ...`).
+
+---
+
+### Prompt 4
+
+> [Cole de terminal — erro de aridade do brili]
+> ```
+> python3 codegen_bril_v4_1.py exemplo.cl
+> brili exemplo.bril.json 10 23 44
+> error: mismatched main argument arity: expected 0; got 3
+> ```
+
+**Causa:** o `codegen_bril_v4_1.py` foi invocado sem `--main-input`, então `@main` foi gerado sem parâmetros. Ao passar `10 23 44` para o `brili`, ele esperava 0 argumentos e recebeu 3.
+
+**Fix:** recompilar com `--main-input`:
+
+```sh
+python3 codegen_bril_v4_1.py exemplo.cl --main-input
+brili exemplo.bril.json 10 23 44
+```
+
+---
+
+### Prompt 5
+
+> "Isso é possível com Bril? [código COOL de verificador de palíndromo usando `in_string()` e operações de string]"
+
+**Resposta:** parcialmente. Operações como `length()`, `substr()`, `=` (igualdade de strings), `concat()` e recursão funcionam no V4. O bloqueio real é `in_string()` — não existe op Bril para leitura de strings em tempo de execução. O V4.1 contorna isso com `--main-string "texto"`, que injeta a string como constante em tempo de compilação.
+
+---
+
+### Prompt 6
+
+> "Gere uma tabela markdown de cada argumento do `codegen_bril_v4_1.py` com descrição e exemplo de uso (em ptbr)."
+
+**O que foi feito:** tabela gerada com 7 argumentos (`arquivo`, `--no-print-main`, `--strict-semantic`, `--debug-string-ids`, `--main-input`, `--main-inputs`, `--main-string`), com descrições em português e exemplos de invocação concretos.
+
+---
+
+### Prompt 7
+
+> "Salve no arquivo `ARGS.md`."
+
+**O que foi feito:** criado `ARGS.md` com a tabela completa de argumentos CLI do `codegen_bril_v4_1.py`.
