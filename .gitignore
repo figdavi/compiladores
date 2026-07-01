@@ -1,3 +1,4 @@
 bril/
 chocopy2bril/
 *.bril*
+__pycache__
